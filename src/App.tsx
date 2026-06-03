@@ -16,7 +16,9 @@ const COLORS = [
 ];
 
 export default function App() {
-  const [simulatorEnabled, setSimulatorEnabled] = useState(true);
+  const [selectedProfile, setSelectedProfile] = useState<'padre' | 'usuario' | null>(null);
+  const [selectedAgeRange, setSelectedAgeRange] = useState<'primaria' | 'secundaria' | 'adulto' | null>(null);
+  const [simulatorEnabled, setSimulatorEnabled] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [ghostPos, setGhostPos] = useState({ x: 0, y: 0 });
   const [currentFont, setCurrentFont] = useState(0);
@@ -87,18 +89,233 @@ export default function App() {
       className={`min-h-screen w-full overflow-x-hidden transition-colors duration-500 font-sans relative 
         ${simulatorEnabled ? 'bg-[#00FF41] text-black' : 'bg-white text-black'}`}
     >
+      {/* Questionnaire / Profile Modal Overlay at Load */}
+      {(selectedProfile === null || (selectedProfile === 'usuario' && selectedAgeRange === null)) && (
+        <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="w-full max-w-2xl bg-white border-4 sm:border-8 border-black shadow-[8px_8px_0px_0px_rgba(236,72,153,1)] sm:shadow-[16px_16px_0px_0px_rgba(236,72,153,1)] overflow-hidden scale-100 transition-all duration-300 my-auto">
+            
+            {/* Header Banner */}
+            <div className="bg-black text-[#00FF41] border-b-4 sm:border-b-8 border-black p-4 sm:p-6 font-mono flex items-center gap-3 sm:gap-4">
+              <Brain className="text-pink-500 animate-pulse shrink-0 w-8 h-8 sm:w-9 sm:h-9" />
+              <div>
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black uppercase tracking-tight font-sans">
+                  PERFIL DE USUARIO
+                </h2>
+                <p className="text-[10px] sm:text-xs text-white uppercase opacity-70">
+                  configuración inicial del simulador de tdah
+                </p>
+              </div>
+            </div>
+
+            {/* Content Container */}
+            <div className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 md:space-y-8 bg-amber-50">
+              {selectedProfile === null ? (
+                // Step 1: Select Profile
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="space-y-2 sm:space-y-3">
+                    <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-black uppercase text-black font-sans leading-tight">
+                      ¿Cómo deseas experimentar este sitio web?
+                    </h3>
+                    <p className="text-gray-800 text-xs sm:text-sm leading-relaxed font-semibold">
+                      Esta plataforma incluye un simulador interactivo de estímulos visuales complejos que recrea desafíos y distractores para empatizar con el alumnado con TDAH. Selecciona tu perfil:
+                    </p>
+                  </div>
+
+                  {/* Profiles Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                    
+                    {/* Padre / Madre */}
+                    <button
+                      onClick={() => {
+                        setSelectedProfile('padre');
+                        setSimulatorEnabled(true);
+                        // Default to 'secundaria' for exploring in Section 4, but let them change
+                        setSelectedAgeRange('secundaria');
+                      }}
+                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 sm:p-5 md:p-6 hover:bg-black hover:text-white transition-all duration-200 text-left flex flex-col justify-between items-start gap-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
+                    >
+                      <div className="space-y-2">
+                        <span className="inline-block bg-black text-[#00FF41] text-[9px] sm:text-[10px] font-mono font-black uppercase px-2 py-0.5 border-2 border-black group-hover:bg-[#00FF41] group-hover:text-black">
+                          RECOMENDADO
+                        </span>
+                        <h4 className="text-base sm:text-lg font-black uppercase tracking-tight block">
+                          Soy Madre / Padre / Docente
+                        </h4>
+                        <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90">
+                          Activa por defecto el simulador. Experimenta el caos sensorial extremo (distracciones fantasmas, fuentes oscilantes y ruidos visuales) para comprender sus desafíos de primera mano.
+                        </p>
+                      </div>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-2 group-hover:underline">
+                        [ VER SIMULADOR ACTIVO ] →
+                      </span>
+                    </button>
+
+                    {/* Alumno / Usuario */}
+                    <button
+                      onClick={() => {
+                        setSelectedProfile('usuario');
+                        setSimulatorEnabled(false);
+                      }}
+                      className="group relative bg-white text-black border-4 border-black p-4 sm:p-5 md:p-6 hover:bg-pink-500 hover:text-white transition-all duration-200 text-left flex flex-col justify-between items-start gap-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
+                    >
+                      <div className="space-y-2">
+                        <span className="inline-block bg-neutral-200 text-black text-[9px] sm:text-[10px] font-mono font-black uppercase px-2 py-0.5 border-2 border-black group-hover:bg-black group-hover:text-white">
+                          LECTURA LIMPIA
+                        </span>
+                        <h4 className="text-base sm:text-lg font-black uppercase tracking-tight block">
+                          Soy Alumno / Usuario general
+                        </h4>
+                        <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90">
+                          Mantiene el simulador desactivado. Los textos se verán claros y estables en blanco y negro para consultar directamente los informes y guías de autogestión sin agobios visuales.
+                        </p>
+                      </div>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-2 group-hover:underline">
+                        [ CON CONSULTA LIMPIA ] →
+                      </span>
+                    </button>
+
+                  </div>
+                </div>
+              ) : (
+                // Step 2: Select Age Group (Only for 'usuario' is mandatory)
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex justify-between items-center">
+                    <button
+                      onClick={() => {
+                        setSelectedProfile(null);
+                        setSelectedAgeRange(null);
+                      }}
+                      className="group inline-flex items-center gap-1.5 text-black bg-white hover:bg-black hover:text-white border-2 border-black px-2.5 py-1 text-xs font-mono font-black uppercase transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(236,72,153,1)] active:translate-y-0.5 cursor-pointer"
+                    >
+                      ← Volver a Perfiles
+                    </button>
+                    <span className="text-[10px] sm:text-xs font-mono font-bold text-black uppercase bg-pink-100 px-2.5 py-1 border-2 border-black">
+                      Paso 2 de 2: Tu Edad
+                    </span>
+                  </div>
+
+                  <div className="space-y-2 sm:space-y-3">
+                    <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-black uppercase text-black font-sans leading-tight">
+                      ¿Cuál es tu edad / etapa académica?
+                    </h3>
+                    <p className="text-gray-800 text-xs sm:text-sm leading-relaxed font-semibold">
+                      Las estrategias de autogestión de este informe se adaptarán a la etapa académica seleccionada para ofrecerte los recursos recomendados que mejor se ajustan a ti:
+                    </p>
+                  </div>
+
+                  {/* Age options list */}
+                  <div className="grid grid-cols-1 gap-3 sm:gap-4">
+                    
+                    {/* Primaria */}
+                    <button
+                      onClick={() => {
+                        setSelectedAgeRange('primaria');
+                      }}
+                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 hover:bg-black hover:text-[#00FF41] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer animate-[fade-in_0.3s_ease]"
+                    >
+                      <div className="space-y-1">
+                        <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
+                          🎒 Educación Primaria (6 a 11 años)
+                        </h4>
+                        <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90 max-w-xl">
+                          Metodologías muy visuales: respiración lúdica con la técnica del globo, autofórmulas habladas simples y desglose visual de tareas.
+                        </p>
+                      </div>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">
+                        [ ELEGIR ] →
+                      </span>
+                    </button>
+
+                    {/* Secundaria */}
+                    <button
+                      onClick={() => {
+                        setSelectedAgeRange('secundaria');
+                      }}
+                      className="group relative bg-[#FFFF00] text-black border-4 border-black p-4 hover:bg-black hover:text-[#FFFF00] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer animate-[fade-in_0.3s_ease]"
+                    >
+                      <div className="space-y-1">
+                        <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
+                          🏫 Secundaria y Bachillerato (12 a 17 años)
+                        </h4>
+                        <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90 max-w-xl">
+                          Productividad estructurada: uso de listas de tareas (checklists), de la técnica Pomodoro adaptada de estudio escolar, y respiración de pauta corta dócil 4-4-6.
+                        </p>
+                      </div>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">
+                        [ ELEGIR ] →
+                      </span>
+                    </button>
+
+                    {/* Universidad / Adultos */}
+                    <button
+                      onClick={() => {
+                        setSelectedAgeRange('adulto');
+                      }}
+                      className="group relative bg-pink-500 text-white border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer animate-[fade-in_0.3s_ease]"
+                    >
+                      <div className="space-y-1">
+                        <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
+                          🎓 Universidad / Edad Adulta (18 años o más)
+                        </h4>
+                        <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90 max-w-xl">
+                          Planificación madura autónoma: despiece analítico frente a la parálisis por análisis, respiraciones con pautas largas y mitigadores drásticos de distractores.
+                        </p>
+                      </div>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">
+                        [ ELEGIR ] →
+                      </span>
+                    </button>
+
+                  </div>
+                </div>
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
+
       {/* Control Panel Toggle */}
       <div className="fixed bottom-8 right-8 z-[500] flex flex-col items-end gap-2">
          <div className={`p-4 border-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] font-mono text-[10px] uppercase space-y-2 transition-colors duration-500 ${simulatorEnabled ? 'bg-black text-white border-pink-500 shadow-[8px_8px_0px_0px_rgba(236,72,153,1)]' : 'bg-white text-black border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'}`}>
             <div className="flex justify-between items-center gap-4">
                <span>MODO_SIMULACIÓN</span>
                <button 
-                 onClick={() => setSimulatorEnabled(!simulatorEnabled)}
-                 className={`w-12 h-6 border-2 relative transition-all duration-300 ${simulatorEnabled ? 'bg-pink-500 border-white' : 'bg-black border-black'}`}
+                 onClick={() => {
+                   const nextVal = !simulatorEnabled;
+                   setSimulatorEnabled(nextVal);
+                   setSelectedProfile(nextVal ? 'padre' : 'usuario');
+                   if (!nextVal && selectedAgeRange === null) {
+                     setSelectedAgeRange('secundaria'); // Fallback default
+                   }
+                 }}
+                 className={`w-12 h-6 border-2 relative transition-all duration-300 ${simulatorEnabled ? 'bg-pink-500 border-white' : 'bg-black border-black'} cursor-pointer`}
                >
                  <div className={`absolute top-0 w-5 h-5 transition-all duration-300 ${simulatorEnabled ? 'right-0 bg-white' : 'left-0 bg-white'}`} />
                </button>
             </div>
+            {selectedProfile && (
+              <div className="flex flex-col gap-1.5 pt-2 border-t border-dashed border-current/35">
+                 <div className="flex justify-between items-center gap-4">
+                    <span className="font-bold">PERFIL: {selectedProfile === 'padre' ? 'PADRE / TUTOR' : 'ALUMNO'}</span>
+                    <button 
+                      onClick={() => {
+                        setSelectedProfile(null);
+                        setSelectedAgeRange(null);
+                        setSimulatorEnabled(false);
+                      }}
+                      className={`px-1.5 py-0.5 border-2 text-[9px] uppercase font-black transition-colors ${simulatorEnabled ? 'bg-pink-500 text-white border-white hover:bg-white hover:text-black' : 'bg-black text-white hover:bg-neutral-800'} cursor-pointer`}
+                    >
+                      Cambiar
+                    </button>
+                 </div>
+                 {selectedProfile === 'usuario' && selectedAgeRange && (
+                   <span className="text-[9px] font-mono opacity-80 block">
+                     ETAPA: {selectedAgeRange === 'primaria' ? 'PRIMARIA (6-11 A)' : selectedAgeRange === 'secundaria' ? 'SECUNDARIA (12-17 A)' : 'ADULTO (18+ A)'}
+                   </span>
+                 )}
+              </div>
+            )}
             <p className="opacity-60">{simulatorEnabled ? 'ESTADO: CAOS_ACTIVO' : 'ESTADO: ESTATICO_BN'}</p>
          </div>
       </div>
@@ -289,77 +506,377 @@ export default function App() {
               Las estrategias de autogestión ayudan al alumnado con TDAH a desarrollar habilidades de organización, atención y regulación emocional, favoreciendo una mayor autonomía (Barkley, 2015).
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8 relative z-10">
-              <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-purple-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
-                <h3 className="font-bold text-2xl">Organización y planificación</h3>
-                <p>Las personas con TDAH suelen beneficiarse de herramientas externas que faciliten la organización y reduzcan la carga cognitiva (Centers for Disease Control and Prevention, 2023).</p>
-                <div className={`p-4 ${simulatorEnabled ? 'bg-white border-2 border-black' : 'border-t border-black'}`}>
-                  <h4 className="font-bold text-sm mb-2 uppercase">Recursos útiles</h4>
-                  <ul className="space-y-1 font-mono text-sm font-bold">
-                    <li>✔ Agendas visuales</li>
-                    <li>✔ Horarios</li>
-                    <li>✔ Listas de tareas (checklists)</li>
-                    <li>✔ Dividir tareas largas en pasos pequeños</li>
-                  </ul>
-                </div>
-                <p className="text-sm italic">Estas herramientas ayudan a anticipar actividades y organizar el tiempo de forma más eficiente (Understood.org, 2022).</p>
+            {/* Active Profile Info Banner */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between border-4 border-black bg-amber-50 p-4 gap-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <div>
+                <p className="font-mono text-xs uppercase font-black text-black">
+                  🎯 Perfil navegador: <span className="underline">{selectedProfile === 'padre' ? 'Madre / Padre / Docente' : 'Alumno / Usuario General'}</span>
+                </p>
+                <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-black mt-1">
+                  Estrategias de Autogestión Personalizadas
+                </h3>
               </div>
-
-              <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-yellow-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
-                <h3 className="font-bold text-2xl">Gestión del tiempo</h3>
-                <p>El alumnado con TDAH puede presentar dificultades para estimar tiempos o iniciar tareas (Child Mind Institute, 2021).</p>
-                <div className={`p-4 font-mono ${simulatorEnabled ? 'bg-black text-white border-2 border-black' : 'border-t border-black'}`}>
-                  <h4 className={`font-bold text-sm mb-2 uppercase ${simulatorEnabled ? 'text-yellow-300' : ''}`}>Técnica Pomodoro adaptada</h4>
-                  <ul className="space-y-2">
-                    <li>⏱ 20–25 minutos de trabajo</li>
-                    <li>☕ Descanso breve</li>
-                    <li>🔁 Repetir</li>
-                  </ul>
-                </div>
-                <p className="text-sm italic">Esta técnica ayuda a mejorar la atención sostenida y reducir la fatiga mental (Child Mind Institute, 2021).</p>
-              </div>
-
-              <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-blue-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
-                <h3 className="font-bold text-2xl">Autoinstrucciones</h3>
-                <p>Las autoinstrucciones consisten en enseñar al alumnado a verbalizar internamente los pasos de una tarea para favorecer el control cognitivo y reducir la impulsividad (Meichenbaum, 1977).</p>
-                <div className={`p-4 ${simulatorEnabled ? 'bg-white border-2 border-black font-bold font-mono' : 'border-t border-black'}`}>
-                   <p className="text-xs uppercase opacity-70 mb-2">Ejemplo:</p>
-                   <ol className="list-decimal pl-4 space-y-1">
-                     <li>¿Qué tengo que hacer?</li>
-                     <li>Lo hago paso a paso</li>
-                     <li>Reviso mi trabajo</li>
-                     <li>¿Lo he conseguido?</li>
-                   </ol>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div className={`p-6 ${simulatorEnabled ? 'bg-green-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
-                  <h3 className="font-bold text-xl mb-2">Regulación emocional</h3>
-                  <p className="text-sm mb-4">Las técnicas de respiración y mindfulness favorecen la regulación emocional y ayudan a reducir la impulsividad y la ansiedad (Harvard Medical School, 2019).</p>
-                  <ul className="text-sm space-y-1 font-bold">
-                    <li>🫁 Respiración diafragmática</li>
-                    <li>🫁 Respiración 4-4-6</li>
-                    <li>🫁 Respiración del globo</li>
-                    <li>🧠 Mindfulness breve</li>
-                  </ul>
-                  <p className="text-xs mt-3 opacity-70">(Greater Good Science Center; Mindful Schools)</p>
-                </div>
-
-                <div className={`p-6 ${simulatorEnabled ? 'bg-pink-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
-                  <h3 className="font-bold text-xl mb-2">Técnicas de concentración</h3>
-                  <p className="text-sm mb-4">Para favorecer la atención puede ser útil:</p>
-                  <ul className="text-sm space-y-1 font-bold">
-                    <li>✔ Realizar una tarea cada vez</li>
-                    <li>✔ Reducir distractores</li>
-                    <li>✔ Mantener espacios organizados</li>
-                    <li>✔ Alternar tiempos de trabajo y descanso</li>
-                    <li>✔ Utilizar apoyos visuales</li>
-                  </ul>
-                  <p className="text-xs mt-3 opacity-70">(Understood.org, 2022; Child Mind Institute, 2021)</p>
-                </div>
+              
+              <div className="flex items-center gap-2 font-mono text-xs">
+                <span className="font-black border-2 border-black bg-black text-[#00FF41] px-2.5 py-1.5 uppercase shrink-0">
+                  {selectedAgeRange === 'primaria' ? '👶 Primaria (6-11)' : selectedAgeRange === 'secundaria' ? '🎒 Secundaria (12-17)' : '🎓 Adulto (18+)'}
+                </span>
               </div>
             </div>
+
+            {/* Stage Selector Tabs */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 border-4 border-black font-mono text-sm bg-black p-1 gap-1">
+              <button
+                type="button"
+                onClick={() => setSelectedAgeRange('primaria')}
+                className={`py-3 px-4 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'primaria' ? 'bg-[#00FF41] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+              >
+                👶 Primaria (6–11 años)
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedAgeRange('secundaria')}
+                className={`py-3 px-4 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'secundaria' || !selectedAgeRange ? 'bg-[#FFFF00] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+              >
+                🎒 Secundaria/Bach (12–17)
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedAgeRange('adulto')}
+                className={`py-3 px-4 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'adulto' ? 'bg-pink-500 text-white shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+              >
+                🎓 Adultos y Uni (18+)
+              </button>
+            </div>
+
+            {/* Render Primaria Strategies */}
+            {(selectedAgeRange === 'primaria') && (
+              <div className="grid md:grid-cols-2 gap-8 relative z-10 animate-[fade-in_0.3s_ease]">
+                
+                {/* 1. Organización y planificación */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-purple-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🗓️</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Organización y planificación</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las personas con TDAH suelen beneficiarse de herramientas externas que faciliten la organización y reduzcan la carga cognitiva (Centers for Disease Control and Prevention, 2023).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black">
+                    <h4 className="font-bold text-xs mb-2 uppercase text-purple-700 font-mono">[ RECURSOS ÚTILES INFANTILES ]</h4>
+                    <ul className="space-y-2 font-mono text-xs font-bold">
+                      <li className="flex items-center gap-2">✔ Agendas visuales</li>
+                      <li className="flex items-center gap-2">✔ Horarios (con claves de color)</li>
+                      <li className="flex items-center gap-2">✔ Dividir tareas largas en pasos pequeños</li>
+                    </ul>
+                  </div>
+                  <p className="text-[11px] italic text-gray-700 font-bold">
+                    Estas herramientas ayudan a anticipar actividades y organizar el tiempo de forma más eficiente (Understood.org, 2022).
+                  </p>
+                </div>
+
+                {/* 2. Autoinstrucciones */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-blue-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🗣️</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Autoinstrucciones</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las autoinstrucciones consisten en enseñar al alumnado a verbalizar internamente los pasos de una tarea para favorecer el control cognitivo y reducir la impulsividad (Meichenbaum, 1977).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black font-bold font-mono">
+                     <p className="text-xs uppercase text-blue-700 mb-2 font-black">[ HABLA INTERNA GUIADA ]</p>
+                     <ol className="list-decimal pl-4 space-y-2 text-xs">
+                       <li>¿Qué tengo que hacer?</li>
+                       <li>Lo hago paso a paso</li>
+                       <li>Reviso mi trabajo</li>
+                       <li>¿Lo he conseguido?</li>
+                     </ol>
+                  </div>
+                </div>
+
+                {/* 3. Regulación emocional */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-green-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🎈</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Regulación emocional</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las técnicas de respiración y mindfulness favorecen la regulación emocional y ayudan a reducir la impulsividad y la ansiedad (Harvard Medical School, 2019).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black">
+                    <h4 className="font-bold text-xs mb-2 uppercase text-green-700 font-mono">[ RESPIRACIÓN EN PRIMARIA ]</h4>
+                    <ul className="space-y-2 font-bold text-xs">
+                      <li className="flex items-center gap-2">🎈 Respiración del globo (visualizar el vientre que se infla)</li>
+                      <li className="flex items-center gap-2">🫁 Respiración diafragmática</li>
+                    </ul>
+                  </div>
+                  <p className="text-[11px] italic text-gray-700 font-bold">
+                    Estas prácticas contribuyen a mejorar la atención sostenida y el bienestar emocional (Greater Good Science Center; Mindful Schools).
+                  </p>
+                </div>
+
+                {/* 4. Técnicas de concentración */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-pink-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🎯</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Técnicas de concentración</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Para favorecer la atención en la etapa de Primaria puede ser útil:
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black">
+                    <ul className="space-y-2 text-xs font-bold font-mono">
+                      <li className="flex items-center gap-2">✔ Realizar una tarea cada vez</li>
+                      <li className="flex items-center gap-2">✔ Reducir distractores complejos</li>
+                      <li className="flex items-center gap-2">✔ Utilizar apoyos visuales</li>
+                    </ul>
+                  </div>
+                  <p className="text-[10px] opacity-70 font-bold mt-2 font-mono">(Understood.org, 2022; Child Mind Institute, 2021)</p>
+                </div>
+
+              </div>
+            )}
+
+            {/* Render Secundaria Strategies */}
+            {(selectedAgeRange === 'secundaria' || !selectedAgeRange) && (
+              <div className="grid md:grid-cols-2 gap-8 relative z-10 animate-[fade-in_0.3s_ease]">
+                
+                {/* 1. Organización y planificación */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-purple-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">📋</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Organización y planificación</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las personas con TDAH suelen beneficiarse de herramientas externas que faciliten la organización y reduzcan la carga cognitiva (Centers for Disease Control and Prevention, 2023).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black">
+                    <h4 className="font-bold text-xs mb-2 uppercase text-purple-700 font-mono">[ RECURSOS ÚTILES SECUNDARIA ]</h4>
+                    <ul className="space-y-2 font-mono text-xs font-bold">
+                      <li className="flex items-center gap-2">✔ Listas de tareas (checklists)</li>
+                      <li className="flex items-center gap-2">✔ Horarios estructurados</li>
+                      <li className="flex items-center gap-2">✔ Agendas visuales</li>
+                      <li className="flex items-center gap-2">✔ Dividir tareas largas en pasos pequeños</li>
+                    </ul>
+                  </div>
+                  <p className="text-[11px] italic text-gray-700 font-bold">
+                    Estas herramientas ayudan a anticipar actividades y organizar el tiempo de forma más eficiente (Understood.org, 2022).
+                  </p>
+                </div>
+
+                {/* 2. Gestión del tiempo */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-yellow-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">⏱️</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Gestión del tiempo</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    El alumnado con TDAH puede presentar dificultades para estimar tiempos o iniciar tareas (Child Mind Institute, 2021).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black font-mono">
+                    <h4 className="font-bold text-xs mb-2 uppercase text-yellow-600">[ TÉCNICA POMODORO ADAPTADA ]</h4>
+                    <ul className="space-y-2 text-xs font-bold">
+                      <li className="flex items-center gap-2">⏱ 20–25 minutos de trabajo sostenido</li>
+                      <li className="flex items-center gap-2">☕ Descanso breve (estirar / agua)</li>
+                      <li className="flex items-center gap-2">🔁 Repetir ciclo</li>
+                    </ul>
+                  </div>
+                  <p className="text-[11px] italic text-gray-700 font-bold">
+                    Esta técnica ayuda a mejorar la atención sostenida y reducir la fatiga mental (Child Mind Institute, 2021).
+                  </p>
+                </div>
+
+                {/* 3. Autoinstrucciones */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-blue-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🗣️</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Autoinstrucciones</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las autoinstrucciones consisten en enseñar al alumnado a verbalizar internamente los pasos de una tarea para favorecer el control cognitivo y reducir la impulsividad (Meichenbaum, 1977).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black font-bold font-mono">
+                     <p className="text-xs uppercase text-blue-700 mb-2 font-black">[ PASOS DE AUTOMONITOREO ]</p>
+                     <ol className="list-decimal pl-4 space-y-1.5 text-xs">
+                       <li>¿Qué tengo que hacer?</li>
+                       <li>Lo hago paso a paso</li>
+                       <li>Reviso mi trabajo</li>
+                       <li>¿Lo he conseguido?</li>
+                     </ol>
+                  </div>
+                </div>
+
+                {/* 4. Regulación emocional */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-green-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🧘</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Regulación emocional</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las técnicas de respiración y mindfulness favorecen la regulación emocional y ayudan a reducir la impulsividad y la ansiedad (Harvard Medical School, 2019).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black">
+                    <h4 className="font-bold text-xs mb-2 uppercase text-green-700 font-mono">[ PAUTAS EN SECUNDARIA ]</h4>
+                    <ul className="space-y-2 font-bold text-xs">
+                      <li className="flex items-center gap-2">🧘 Respiración 4-4-6 (inhala 4s, retén 4s, exhala 6s)</li>
+                      <li className="flex items-center gap-2">🫁 Respiración diafragmática</li>
+                      <li className="flex items-center gap-2">🧠 Mindfulness breve antes de estudiar</li>
+                    </ul>
+                  </div>
+                  <p className="text-[11px] italic text-gray-700 font-bold">
+                    Estas prácticas contribuyen a mejorar la atención sostenida y el bienestar emocional (Greater Good Science Center; Mindful Schools).
+                  </p>
+                </div>
+
+                {/* 5. Técnicas de concentración */}
+                <div className={`p-6 md:col-span-2 space-y-4 ${simulatorEnabled ? 'bg-pink-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🎯</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Técnicas de concentración</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Para favorecer la atención en tus sesiones escolares puede ser útil:
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="p-3 bg-amber-50 border-2 border-black">
+                      <ul className="space-y-1.5 text-xs font-bold font-mono">
+                        <li>✔ Realizar una tarea cada vez</li>
+                        <li>✔ Reducir distractores (móvil silbado lejos)</li>
+                      </ul>
+                    </div>
+                    <div className="p-3 bg-amber-50 border-2 border-black">
+                      <ul className="space-y-1.5 text-xs font-bold font-mono">
+                        <li>✔ Alternar tiempos de trabajo y descanso</li>
+                        <li>✔ Mantener espacios de estudio organizados</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <p className="text-[10px] opacity-70 font-bold font-mono">(Understood.org, 2022; Child Mind Institute, 2021)</p>
+                </div>
+
+              </div>
+            )}
+
+            {/* Render Adulto Strategies */}
+            {(selectedAgeRange === 'adulto') && (
+              <div className="grid md:grid-cols-2 gap-8 relative z-10 animate-[fade-in_0.3s_ease]">
+                
+                {/* 1. Organización y planificación */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-purple-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">✍️</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Planificación y Mitigación Cognitiva</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las personas con TDAH suelen beneficiarse de herramientas externas que faciliten la organización y reduzcan la carga cognitiva (Centers for Disease Control and Prevention, 2023).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black">
+                    <h4 className="font-bold text-xs mb-2 uppercase text-purple-700 font-mono">[ DIRECTRICES PARA LA EDAD ADULTA ]</h4>
+                    <ul className="space-y-2 font-mono text-xs font-bold">
+                      <li className="flex items-center gap-2">✔ Listas de tareas (checklists) de alta prioridad</li>
+                      <li className="flex items-center gap-2">✔ Dividir tareas largas en pasos pequeños (frenar parálisis)</li>
+                      <li className="flex items-center gap-2">✔ Horarios explícitos de bloques de descompresión</li>
+                    </ul>
+                  </div>
+                  <p className="text-[11px] italic text-gray-700 font-bold">
+                    Estas herramientas ayudan a anticipar actividades y organizar el tiempo de forma más eficiente (Understood.org, 2022).
+                  </p>
+                </div>
+
+                {/* 2. Gestión del tiempo */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-yellow-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">⏱️</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Gestión del tiempo y foco</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    El alumnado con TDAH puede presentar dificultades para estimar tiempos o iniciar tareas (Child Mind Institute, 2021).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black font-mono">
+                    <h4 className="font-bold text-xs mb-2 uppercase text-yellow-600">[ CICLO POMODORO AUTÓNOMO ]</h4>
+                    <ul className="space-y-2 text-xs font-bold">
+                      <li className="flex items-center gap-2">⏱ 20–25 minutos de labor de alta densidad</li>
+                      <li className="flex items-center gap-2">☕ Descanso breve con movimiento activo o estiramiento</li>
+                      <li className="flex items-center gap-2">🔁 Repetir ciclo</li>
+                    </ul>
+                  </div>
+                  <p className="text-[11px] italic text-gray-700 font-bold">
+                    Esta técnica ayuda a mejorar la atención sostenida y reducir la fatiga mental (Child Mind Institute, 2021).
+                  </p>
+                </div>
+
+                {/* 3. Autoinstrucciones */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-blue-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🗣️</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Autoinstrucciones avanzadas</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las autoinstrucciones consisten en enseñar al alumnado a verbalizar internamente los pasos de una tarea para favorecer el control cognitivo y reducir la impulsividad (Meichenbaum, 1977).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black font-bold font-mono">
+                     <p className="text-xs uppercase text-blue-700 mb-2 font-black">[ PROTOCOLO DE CONDUCCIÓN COGNITIVA ]</p>
+                     <ol className="list-decimal pl-4 space-y-2 text-xs">
+                       <li>¿Qué tengo que hacer? (Definir el foco nuclear)</li>
+                       <li>Lo hago paso a paso (Control de sobrecarga)</li>
+                       <li>Reviso mi trabajo (Supervisar la deriva atencional)</li>
+                       <li>¿Lo he conseguido? (Refuerzo metacognitivo positivo)</li>
+                     </ol>
+                  </div>
+                </div>
+
+                {/* 4. Regulación emocional */}
+                <div className={`p-6 space-y-4 ${simulatorEnabled ? 'bg-green-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🧘</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Descompresión y Desactivación</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Las técnicas de respiración y mindfulness favorecen la regulación emocional y ayudan a reducir la impulsividad y la ansiedad (Harvard Medical School, 2019).
+                  </p>
+                  <div className="p-4 bg-amber-50 border-2 border-black">
+                    <h4 className="font-bold text-xs mb-2 uppercase text-green-700 font-mono">[ REGULACIÓN FISIOLÓGICA ]</h4>
+                    <ul className="space-y-2 font-bold text-xs">
+                      <li className="flex items-center gap-2">🧘 Respiración 4-4-6 (ideal para regular desbordes)</li>
+                      <li className="flex items-center gap-2">🫁 Respiración diafragmática (control de cortisol)</li>
+                      <li className="flex items-center gap-2">🧠 Mindfulness breve</li>
+                    </ul>
+                  </div>
+                  <p className="text-[11px] italic text-gray-700 font-bold">
+                    Estas prácticas contribuyen a mejorar la atención sostenida y el bienestar emocional (Greater Good Science Center; Mindful Schools).
+                  </p>
+                </div>
+
+                {/* 5. Técnicas de concentración */}
+                <div className={`p-6 md:col-span-2 space-y-4 ${simulatorEnabled ? 'bg-pink-100 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl">🎯</span>
+                    <h3 className="font-extrabold text-2xl uppercase tracking-tight">Técnicas de concentración profunda</h3>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Para optimizar tu jornada y evitar la sobreestimulación mental:
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="p-3 bg-amber-50 border-2 border-black">
+                      <ul className="space-y-1.5 text-xs font-bold font-mono">
+                        <li>✔ Reducir distractores complejos (bloquear feeds, web blockers)</li>
+                        <li>✔ Realizar una tarea cada vez (apagar por completo la multitarea)</li>
+                      </ul>
+                    </div>
+                    <div className="p-3 bg-amber-50 border-2 border-black">
+                      <ul className="space-y-1.5 text-xs font-bold font-mono">
+                        <li>✔ Alternar tiempos de trabajo y descanso activo</li>
+                        <li>✔ Mantener espacios físicos organizados para rebajar ruido visual</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <p className="text-[10px] opacity-70 font-bold font-mono">(Understood.org, 2022; Child Mind Institute, 2021)</p>
+                </div>
+
+              </div>
+            )}
+
           </div>
         </section>
 
