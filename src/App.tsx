@@ -92,23 +92,23 @@ export default function App() {
       {/* Questionnaire / Profile Modal Overlay at Load */}
       {(selectedProfile === null || (selectedProfile === 'usuario' && selectedAgeRange === null)) && (
         <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-2xl bg-white border-4 sm:border-8 border-black shadow-[8px_8px_0px_0px_rgba(236,72,153,1)] sm:shadow-[16px_16px_0px_0px_rgba(236,72,153,1)] overflow-hidden scale-100 transition-all duration-300 my-auto">
+          <div className="w-full max-w-2xl bg-white border-4 sm:border-8 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] sm:shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] overflow-hidden scale-100 transition-all duration-300 my-auto">
             
             {/* Header Banner */}
-            <div className="bg-black text-[#00FF41] border-b-4 sm:border-b-8 border-black p-4 sm:p-6 font-mono flex items-center gap-3 sm:gap-4">
-              <Brain className="text-pink-500 animate-pulse shrink-0 w-8 h-8 sm:w-9 sm:h-9" />
+            <div className="bg-black text-white border-b-4 sm:border-b-8 border-black p-4 sm:p-6 font-mono flex items-center gap-3 sm:gap-4">
+              <Brain className="shrink-0 w-8 h-8 sm:w-9 sm:h-9" />
               <div>
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black uppercase tracking-tight font-sans">
                   PERFIL DE USUARIO
                 </h2>
                 <p className="text-[10px] sm:text-xs text-white uppercase opacity-70">
-                  configuración inicial del simulador de tdah
+                  configuración inicial del sitio web
                 </p>
               </div>
             </div>
 
             {/* Content Container */}
-            <div className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 md:space-y-8 bg-amber-50">
+            <div className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 md:space-y-8 bg-white">
               {selectedProfile === null ? (
                 // Step 1: Select Profile
                 <div className="space-y-4 sm:space-y-6">
@@ -132,21 +132,21 @@ export default function App() {
                         // Default to 'b1' for exploring in Section 4, but let them change
                         setSelectedAgeRange('b1');
                       }}
-                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 sm:p-5 md:p-6 hover:bg-black hover:text-white transition-all duration-200 text-left flex flex-col justify-between items-start gap-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
+                      className="group relative bg-black text-white border-4 border-black p-4 sm:p-5 md:p-6 hover:bg-neutral-800 transition-all duration-200 text-left flex flex-col justify-between items-start gap-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
                     >
                       <div className="space-y-2">
-                        <span className="inline-block bg-black text-[#00FF41] text-[9px] sm:text-[10px] font-mono font-black uppercase px-2 py-0.5 border-2 border-black group-hover:bg-[#00FF41] group-hover:text-black">
-                          RECOMENDADO
+                        <span className="inline-block bg-white text-black text-[9px] sm:text-[10px] font-mono font-black uppercase px-2 py-0.5 border-2 border-black">
+                          MODO EXPERIMENTAL
                         </span>
                         <h4 className="text-base sm:text-lg font-black uppercase tracking-tight block">
                           Soy Madre / Padre / Docente
                         </h4>
                         <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90">
-                          Activa por defecto el simulador. Experimenta el caos sensorial extremo (distracciones fantasmas, fuentes oscilantes y ruidos visuales) para comprender sus desafíos de primera mano.
+                          Activa el simulador para experimentar los desafíos visuales y distractores de primera mano y empatizar con las dificultades atencionales.
                         </p>
                       </div>
                       <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-2 group-hover:underline">
-                        [ VER SIMULADOR ACTIVO ] →
+                        [ VER CON SIMULADOR ] →
                       </span>
                     </button>
 
@@ -156,21 +156,21 @@ export default function App() {
                         setSelectedProfile('usuario');
                         setSimulatorEnabled(false);
                       }}
-                      className="group relative bg-white text-black border-4 border-black p-4 sm:p-5 md:p-6 hover:bg-pink-500 hover:text-white transition-all duration-200 text-left flex flex-col justify-between items-start gap-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
+                      className="group relative bg-white text-black border-4 border-black p-4 sm:p-5 md:p-6 hover:bg-neutral-100 transition-all duration-200 text-left flex flex-col justify-between items-start gap-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
                     >
                       <div className="space-y-2">
-                        <span className="inline-block bg-neutral-200 text-black text-[9px] sm:text-[10px] font-mono font-black uppercase px-2 py-0.5 border-2 border-black group-hover:bg-black group-hover:text-white">
+                        <span className="inline-block bg-neutral-200 text-black text-[9px] sm:text-[10px] font-mono font-black uppercase px-2 py-0.5 border-2 border-black">
                           LECTURA LIMPIA
                         </span>
                         <h4 className="text-base sm:text-lg font-black uppercase tracking-tight block">
                           Soy Alumno / Usuario general
                         </h4>
                         <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90">
-                          Mantiene el simulador desactivado. Los textos se verán claros y estables en blanco y negro para consultar directamente los informes y guías de autogestión sin agobios visuales.
+                          Mantiene el sitio web con un diseño estático y claro en blanco y negro para consultar directamente los informes sin distracciones.
                         </p>
                       </div>
                       <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-2 group-hover:underline">
-                        [ CON CONSULTA LIMPIA ] →
+                        [ MODO LECTURA ] →
                       </span>
                     </button>
 
@@ -189,7 +189,7 @@ export default function App() {
                     >
                       ← Volver a Perfiles
                     </button>
-                    <span className="text-[10px] sm:text-xs font-mono font-bold text-black uppercase bg-pink-100 px-2.5 py-1 border-2 border-black">
+                    <span className="text-[10px] sm:text-xs font-mono font-bold text-white uppercase bg-black px-2.5 py-1 border-2 border-black">
                       Paso 2 de 2: Tu Edad
                     </span>
                   </div>
@@ -209,7 +209,7 @@ export default function App() {
                     {/* Primaria 1 */}
                     <button
                       onClick={() => setSelectedAgeRange('p1')}
-                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 hover:bg-black hover:text-[#00FF41] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                      className="group relative bg-white text-black border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
@@ -223,7 +223,7 @@ export default function App() {
                     {/* Primaria 2 */}
                     <button
                       onClick={() => setSelectedAgeRange('p2')}
-                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 hover:bg-black hover:text-[#00FF41] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                      className="group relative bg-white text-black border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
@@ -237,7 +237,7 @@ export default function App() {
                     {/* Primaria 3 */}
                     <button
                       onClick={() => setSelectedAgeRange('p3')}
-                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 hover:bg-black hover:text-[#00FF41] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                      className="group relative bg-white text-black border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
@@ -251,7 +251,7 @@ export default function App() {
                     {/* Bachillerato 1 */}
                     <button
                       onClick={() => setSelectedAgeRange('b1')}
-                      className="group relative bg-[#FFFF00] text-black border-4 border-black p-4 hover:bg-black hover:text-[#FFFF00] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                      className="group relative bg-white text-black border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
@@ -265,7 +265,7 @@ export default function App() {
                     {/* Bachillerato 2 */}
                     <button
                       onClick={() => setSelectedAgeRange('b2')}
-                      className="group relative bg-[#FFFF00] text-black border-4 border-black p-4 hover:bg-black hover:text-[#FFFF00] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                      className="group relative bg-white text-black border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
@@ -279,7 +279,7 @@ export default function App() {
                     {/* 18 a 21 */}
                     <button
                       onClick={() => setSelectedAgeRange('a18')}
-                      className="group relative bg-pink-500 text-white border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                      className="group relative bg-white text-black border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
