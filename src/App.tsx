@@ -17,7 +17,7 @@ const COLORS = [
 
 export default function App() {
   const [selectedProfile, setSelectedProfile] = useState<'padre' | 'usuario' | null>(null);
-  const [selectedAgeRange, setSelectedAgeRange] = useState<'primaria' | 'secundaria' | 'adulto' | null>(null);
+  const [selectedAgeRange, setSelectedAgeRange] = useState<'p1' | 'p2' | 'p3' | 'b1' | 'b2' | 'a18' | null>(null);
   const [simulatorEnabled, setSimulatorEnabled] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [ghostPos, setGhostPos] = useState({ x: 0, y: 0 });
@@ -129,8 +129,8 @@ export default function App() {
                       onClick={() => {
                         setSelectedProfile('padre');
                         setSimulatorEnabled(true);
-                        // Default to 'secundaria' for exploring in Section 4, but let them change
-                        setSelectedAgeRange('secundaria');
+                        // Default to 'b1' for exploring in Section 4, but let them change
+                        setSelectedAgeRange('b1');
                       }}
                       className="group relative bg-[#00FF41] text-black border-4 border-black p-4 sm:p-5 md:p-6 hover:bg-black hover:text-white transition-all duration-200 text-left flex flex-col justify-between items-start gap-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
                     >
@@ -206,64 +206,88 @@ export default function App() {
                   {/* Age options list */}
                   <div className="grid grid-cols-1 gap-3 sm:gap-4">
                     
-                    {/* Primaria */}
+                    {/* Primaria 1 */}
                     <button
-                      onClick={() => {
-                        setSelectedAgeRange('primaria');
-                      }}
-                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 hover:bg-black hover:text-[#00FF41] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer animate-[fade-in_0.3s_ease]"
+                      onClick={() => setSelectedAgeRange('p1')}
+                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 hover:bg-black hover:text-[#00FF41] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🎒 Educación Primaria (6 a 11 años)
+                          🎒 1 Ciclo Primaria
                         </h4>
-                        <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90 max-w-xl">
-                          Metodologías muy visuales: respiración lúdica con la técnica del globo, autofórmulas habladas simples y desglose visual de tareas.
-                        </p>
+                        <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Estrategias de autogestión adaptadas para el primer tramo escolar.</p>
                       </div>
-                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">
-                        [ ELEGIR ] →
-                      </span>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">[ ELEGIR ] →</span>
                     </button>
 
-                    {/* Secundaria */}
+                    {/* Primaria 2 */}
                     <button
-                      onClick={() => {
-                        setSelectedAgeRange('secundaria');
-                      }}
-                      className="group relative bg-[#FFFF00] text-black border-4 border-black p-4 hover:bg-black hover:text-[#FFFF00] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer animate-[fade-in_0.3s_ease]"
+                      onClick={() => setSelectedAgeRange('p2')}
+                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 hover:bg-black hover:text-[#00FF41] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🏫 Secundaria y Bachillerato (12 a 17 años)
+                          🎒 2 Ciclo Primaria
                         </h4>
-                        <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90 max-w-xl">
-                          Productividad estructurada: uso de listas de tareas (checklists), de la técnica Pomodoro adaptada de estudio escolar, y respiración de pauta corta dócil 4-4-6.
-                        </p>
+                        <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Recursos visuales y organizativos para el alumnado de ciclo medio.</p>
                       </div>
-                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">
-                        [ ELEGIR ] →
-                      </span>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">[ ELEGIR ] →</span>
                     </button>
 
-                    {/* Universidad / Adultos */}
+                    {/* Primaria 3 */}
                     <button
-                      onClick={() => {
-                        setSelectedAgeRange('adulto');
-                      }}
-                      className="group relative bg-pink-500 text-white border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer animate-[fade-in_0.3s_ease]"
+                      onClick={() => setSelectedAgeRange('p3')}
+                      className="group relative bg-[#00FF41] text-black border-4 border-black p-4 hover:bg-black hover:text-[#00FF41] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🎓 Universidad / Edad Adulta (18 años o más)
+                          🎒 3 Ciclo Primaria
                         </h4>
-                        <p className="text-[10px] sm:text-[11px] font-bold leading-relaxed opacity-90 max-w-xl">
-                          Planificación madura autónoma: despiece analítico frente a la parálisis por análisis, respiraciones con pautas largas y mitigadores drásticos de distractores.
-                        </p>
+                        <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Preparación para la transición con técnicas de autonomía avanzada.</p>
                       </div>
-                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">
-                        [ ELEGIR ] →
-                      </span>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">[ ELEGIR ] →</span>
+                    </button>
+
+                    {/* Bachillerato 1 */}
+                    <button
+                      onClick={() => setSelectedAgeRange('b1')}
+                      className="group relative bg-[#FFFF00] text-black border-4 border-black p-4 hover:bg-black hover:text-[#FFFF00] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                    >
+                      <div className="space-y-1">
+                        <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
+                          🏫 1 Ciclo Batxiller
+                        </h4>
+                        <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Gestión del tiempo y foco para la alta exigencia académica.</p>
+                      </div>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">[ ELEGIR ] →</span>
+                    </button>
+
+                    {/* Bachillerato 2 */}
+                    <button
+                      onClick={() => setSelectedAgeRange('b2')}
+                      className="group relative bg-[#FFFF00] text-black border-4 border-black p-4 hover:bg-black hover:text-[#FFFF00] transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                    >
+                      <div className="space-y-1">
+                        <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
+                          🏫 2 Ciclo Bachi
+                        </h4>
+                        <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Técnicas de autoinstrucción para el éxito en el tramo final universitario.</p>
+                      </div>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">[ ELEGIR ] →</span>
+                    </button>
+
+                    {/* 18 a 21 */}
+                    <button
+                      onClick={() => setSelectedAgeRange('a18')}
+                      className="group relative bg-pink-500 text-white border-4 border-black p-4 hover:bg-black hover:text-white transition-all duration-200 text-left flex items-start justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                    >
+                      <div className="space-y-1">
+                        <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
+                          🎓 De 18 a 21 años
+                        </h4>
+                        <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Planificación madura y mitigación del caos sensorial en la vida adulta.</p>
+                      </div>
+                      <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase mt-1 shrink-0 group-hover:underline">[ ELEGIR ] →</span>
                     </button>
 
                   </div>
@@ -286,7 +310,7 @@ export default function App() {
                    setSimulatorEnabled(nextVal);
                    setSelectedProfile(nextVal ? 'padre' : 'usuario');
                    if (!nextVal && selectedAgeRange === null) {
-                     setSelectedAgeRange('secundaria'); // Fallback default
+                     setSelectedAgeRange('b1'); // Fallback default
                    }
                  }}
                  className={`w-12 h-6 border-2 relative transition-all duration-300 ${simulatorEnabled ? 'bg-pink-500 border-white' : 'bg-black border-black'} cursor-pointer`}
@@ -311,7 +335,14 @@ export default function App() {
                  </div>
                  {selectedProfile === 'usuario' && selectedAgeRange && (
                    <span className="text-[9px] font-mono opacity-80 block">
-                     ETAPA: {selectedAgeRange === 'primaria' ? 'PRIMARIA (6-11 A)' : selectedAgeRange === 'secundaria' ? 'SECUNDARIA (12-17 A)' : 'ADULTO (18+ A)'}
+                     ETAPA: {
+                       selectedAgeRange === 'p1' ? '1 CICLO PRIMARIA' : 
+                       selectedAgeRange === 'p2' ? '2 CICLO PRIMARIA' : 
+                       selectedAgeRange === 'p3' ? '3 CICLO PRIMARIA' : 
+                       selectedAgeRange === 'b1' ? '1 CICLO BATXILLER' : 
+                       selectedAgeRange === 'b2' ? '2 CICLO BACHI' : 
+                       'DE 18 A 21'
+                     }
                    </span>
                  )}
               </div>
@@ -519,38 +550,66 @@ export default function App() {
               
               <div className="flex items-center gap-2 font-mono text-xs">
                 <span className="font-black border-2 border-black bg-black text-[#00FF41] px-2.5 py-1.5 uppercase shrink-0">
-                  {selectedAgeRange === 'primaria' ? '👶 Primaria (6-11)' : selectedAgeRange === 'secundaria' ? '🎒 Secundaria (12-17)' : '🎓 Adulto (18+)'}
+                  {
+                    selectedAgeRange === 'p1' ? '👶 1 Ciclo Primaria' : 
+                    selectedAgeRange === 'p2' ? '👶 2 Ciclo Primaria' : 
+                    selectedAgeRange === 'p3' ? '👶 3 Ciclo Primaria' : 
+                    selectedAgeRange === 'b1' ? '🎒 1 Ciclo Batxiller' : 
+                    selectedAgeRange === 'b2' ? '🎒 2 Ciclo Bachi' : 
+                    '🎓 De 18 a 21'
+                  }
                 </span>
               </div>
             </div>
 
             {/* Stage Selector Tabs */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 border-4 border-black font-mono text-sm bg-black p-1 gap-1">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border-4 border-black font-mono text-[10px] sm:text-xs bg-black p-1 gap-1">
               <button
                 type="button"
-                onClick={() => setSelectedAgeRange('primaria')}
-                className={`py-3 px-4 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'primaria' ? 'bg-[#00FF41] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                onClick={() => setSelectedAgeRange('p1')}
+                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'p1' ? 'bg-[#00FF41] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
               >
-                👶 Primaria (6–11 años)
+                1 Primaria
               </button>
               <button
                 type="button"
-                onClick={() => setSelectedAgeRange('secundaria')}
-                className={`py-3 px-4 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'secundaria' || !selectedAgeRange ? 'bg-[#FFFF00] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                onClick={() => setSelectedAgeRange('p2')}
+                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'p2' ? 'bg-[#00FF41] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
               >
-                🎒 Secundaria/Bach (12–17)
+                2 Primaria
               </button>
               <button
                 type="button"
-                onClick={() => setSelectedAgeRange('adulto')}
-                className={`py-3 px-4 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'adulto' ? 'bg-pink-500 text-white shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                onClick={() => setSelectedAgeRange('p3')}
+                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'p3' ? 'bg-[#00FF41] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
               >
-                🎓 Adultos y Uni (18+)
+                3 Primaria
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedAgeRange('b1')}
+                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'b1' ? 'bg-[#FFFF00] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+              >
+                1 Bachi
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedAgeRange('b2')}
+                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'b2' ? 'bg-[#FFFF00] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+              >
+                2 Bachi
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedAgeRange('a18')}
+                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'a18' ? 'bg-pink-500 text-white shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+              >
+                18 - 21
               </button>
             </div>
 
             {/* Render Primaria Strategies */}
-            {(selectedAgeRange === 'primaria') && (
+            {(selectedAgeRange === 'p1' || selectedAgeRange === 'p2' || selectedAgeRange === 'p3') && (
               <div className="grid md:grid-cols-2 gap-8 relative z-10 animate-[fade-in_0.3s_ease]">
                 
                 {/* 1. Organización y planificación */}
@@ -638,8 +697,8 @@ export default function App() {
               </div>
             )}
 
-            {/* Render Secundaria Strategies */}
-            {(selectedAgeRange === 'secundaria' || !selectedAgeRange) && (
+            {/* Render Secundaria/Bachillerato Strategies */}
+            {(selectedAgeRange === 'b1' || selectedAgeRange === 'b2') && (
               <div className="grid md:grid-cols-2 gap-8 relative z-10 animate-[fade-in_0.3s_ease]">
                 
                 {/* 1. Organización y planificación */}
@@ -652,7 +711,7 @@ export default function App() {
                     Las personas con TDAH suelen beneficiarse de herramientas externas que faciliten la organización y reduzcan la carga cognitiva (Centers for Disease Control and Prevention, 2023).
                   </p>
                   <div className="p-4 bg-amber-50 border-2 border-black">
-                    <h4 className="font-bold text-xs mb-2 uppercase text-purple-700 font-mono">[ RECURSOS ÚTILES SECUNDARIA ]</h4>
+                    <h4 className="font-bold text-xs mb-2 uppercase text-purple-700 font-mono">[ RECURSOS ÚTILES BACHILLERATO ]</h4>
                     <ul className="space-y-2 font-mono text-xs font-bold">
                       <li className="flex items-center gap-2">✔ Listas de tareas (checklists)</li>
                       <li className="flex items-center gap-2">✔ Horarios estructurados</li>
@@ -758,8 +817,8 @@ export default function App() {
               </div>
             )}
 
-            {/* Render Adulto Strategies */}
-            {(selectedAgeRange === 'adulto') && (
+            {/* Render Adulto/18-21 Strategies */}
+            {(selectedAgeRange === 'a18') && (
               <div className="grid md:grid-cols-2 gap-8 relative z-10 animate-[fade-in_0.3s_ease]">
                 
                 {/* 1. Organización y planificación */}
