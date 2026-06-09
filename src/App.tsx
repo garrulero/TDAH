@@ -563,47 +563,53 @@ export default function App() {
             </div>
 
             {/* Stage Selector Tabs */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border-4 border-black font-mono text-[10px] sm:text-xs bg-black p-1 gap-1">
+            <div className="flex flex-wrap sm:grid sm:grid-cols-3 lg:grid-cols-6 border-4 border-black font-mono text-[10px] sm:text-xs bg-amber-100 p-2 sm:p-3 gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() => setSelectedAgeRange('p1')}
-                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'p1' ? 'bg-[#00FF41] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'p1' ? 'bg-[#00FF41] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
+                {selectedAgeRange === 'p1' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#00FF41] border border-black"></span></span>}
                 1 Primaria
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedAgeRange('p2')}
-                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'p2' ? 'bg-[#00FF41] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'p2' ? 'bg-[#00FF41] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
+                {selectedAgeRange === 'p2' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#00FF41] border border-black"></span></span>}
                 2 Primaria
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedAgeRange('p3')}
-                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'p3' ? 'bg-[#00FF41] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'p3' ? 'bg-[#00FF41] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
+                {selectedAgeRange === 'p3' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#00FF41] border border-black"></span></span>}
                 3 Primaria
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedAgeRange('b1')}
-                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'b1' ? 'bg-[#FFFF00] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'b1' ? 'bg-[#FFFF00] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
+                {selectedAgeRange === 'b1' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#FFFF00] border border-black"></span></span>}
                 1 Bachi
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedAgeRange('b2')}
-                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'b2' ? 'bg-[#FFFF00] text-black shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'b2' ? 'bg-[#FFFF00] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
+                {selectedAgeRange === 'b2' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#FFFF00] border border-black"></span></span>}
                 2 Bachi
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedAgeRange('a18')}
-                className={`py-2 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer ${selectedAgeRange === 'a18' ? 'bg-pink-500 text-white shadow-[inset_0_-4px_0_0_#000]' : 'bg-neutral-800 text-white hover:bg-neutral-700'}`}
+                className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'a18' ? 'bg-pink-500 text-white shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
+                {selectedAgeRange === 'a18' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-pink-500 border border-black"></span></span>}
                 18 - 21
               </button>
             </div>
