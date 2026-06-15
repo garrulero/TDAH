@@ -213,7 +213,7 @@ export default function App() {
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🎒 1 Ciclo Primaria
+                          🎒 1º Ciclo Primaria (6-8 años)
                         </h4>
                         <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Estrategias de autogestión adaptadas para el primer tramo escolar.</p>
                       </div>
@@ -227,7 +227,7 @@ export default function App() {
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🎒 2 Ciclo Primaria
+                          🎒 2º Ciclo Primaria (8-10 años)
                         </h4>
                         <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Recursos visuales y organizativos para el alumnado de ciclo medio.</p>
                       </div>
@@ -241,7 +241,7 @@ export default function App() {
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🎒 3 Ciclo Primaria
+                          🎒 3º Ciclo Primaria (10-12 años)
                         </h4>
                         <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Preparación para la transición con técnicas de autonomía avanzada.</p>
                       </div>
@@ -255,7 +255,7 @@ export default function App() {
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🏫 1 Ciclo Batxiller
+                          🏫 1º Ciclo Batxiller (16-17 años)
                         </h4>
                         <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Gestión del tiempo y foco para la alta exigencia académica.</p>
                       </div>
@@ -269,7 +269,7 @@ export default function App() {
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🏫 2 Ciclo Bachi
+                          🏫 2º Ciclo Bachi (17-18 años)
                         </h4>
                         <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Técnicas de autoinstrucción para el éxito en el tramo final universitario.</p>
                       </div>
@@ -283,7 +283,7 @@ export default function App() {
                     >
                       <div className="space-y-1">
                         <h4 className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight block">
-                          🎓 De 18 a 21 años
+                          🎓 De 18 a 21 años (18-21 años)
                         </h4>
                         <p className="text-[10px] sm:text-[11px] font-bold opacity-90">Planificación madura y mitigación del caos sensorial en la vida adulta.</p>
                       </div>
@@ -336,12 +336,12 @@ export default function App() {
                  {selectedProfile === 'usuario' && selectedAgeRange && (
                    <span className="text-[9px] font-mono opacity-80 block">
                      ETAPA: {
-                       selectedAgeRange === 'p1' ? '1 CICLO PRIMARIA' : 
-                       selectedAgeRange === 'p2' ? '2 CICLO PRIMARIA' : 
-                       selectedAgeRange === 'p3' ? '3 CICLO PRIMARIA' : 
-                       selectedAgeRange === 'b1' ? '1 CICLO BATXILLER' : 
-                       selectedAgeRange === 'b2' ? '2 CICLO BACHI' : 
-                       'DE 18 A 21'
+                       selectedAgeRange === 'p1' ? '1º CICLO PRIMARIA (6-8 AÑOS)' : 
+                       selectedAgeRange === 'p2' ? '2º CICLO PRIMARIA (8-10 AÑOS)' : 
+                       selectedAgeRange === 'p3' ? '3º CICLO PRIMARIA (10-12 AÑOS)' : 
+                       selectedAgeRange === 'b1' ? '1º CICLO BATXILLER (16-17 AÑOS)' : 
+                       selectedAgeRange === 'b2' ? '2º CICLO BACHI (17-18 AÑOS)' : 
+                       'DE 18 A 21 AÑOS'
                      }
                    </span>
                  )}
@@ -444,87 +444,91 @@ export default function App() {
         </section>
 
         {/* Section 2: ¿Cómo afecta el TDAH al día a día? */}
-        <section id="dia-a-dia" className="space-y-8">
-           <h2 className={`text-4xl md:text-6xl font-black uppercase tracking-tighter ${simulatorEnabled ? 'bg-blue-600 text-white p-4 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform rotate-1' : 'border-b-4 border-black pb-4'}`}>
-            ¿Cómo afecta el TDAH al día a día?
-          </h2>
-          <div className="space-y-6">
-            <p className={`text-xl font-medium ${simulatorEnabled ? 'bg-white border-2 border-black p-4' : ''}`}>
-              El TDAH puede influir en diferentes áreas de la vida cotidiana del niño, niña o adolescente,
-              afectando al ámbito académico, social, emocional y familiar (Frontiers in Psychiatry, 2024).
-            </p>
-
-            <div className={`grid md:grid-cols-2 gap-8 ${simulatorEnabled ? '' : 'grid-cols-1 md:grid-cols-1'}`}>
-              <div className={`p-6 ${simulatorEnabled ? 'bg-yellow-300 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
-                <h3 className="font-bold text-2xl mb-4 underline decoration-4">En el colegio</h3>
-                <p className="mb-4">El alumnado con TDAH puede presentar dificultades para mantener la atención, seguir instrucciones, organizar tareas, gestionar el tiempo o finalizar actividades escolares (DuPaul & Stoner, 2020).</p>
-                <p className="mb-4">Estas dificultades pueden repercutir en el rendimiento académico y generar sentimientos de frustración o desmotivación si no existen apoyos ajustados a sus necesidades (Grupo de Trabajo de la Guía de Práctica Clínica sobre TDAH, 2010).</p>
-                <div className={`mt-6 p-4 ${simulatorEnabled ? 'bg-white border-2 border-black' : 'border-t-2 border-black mt-4'}`}>
-                  <h4 className="font-bold mb-2">¿Qué puede ayudar?</h4>
-                  <ul className="space-y-1 text-sm font-bold">
-                    <li>✔ Tareas fragmentadas</li>
-                    <li>✔ Instrucciones claras y breves</li>
-                    <li>✔ Horarios visuales</li>
-                    <li>✔ Adaptaciones metodológicas</li>
-                    <li>✔ Refuerzo positivo</li>
-                  </ul>
-                  <p className="text-xs mt-2 opacity-70">(DuPaul & Stoner, 2020)</p>
+        {selectedProfile !== 'usuario' && (
+          <section id="dia-a-dia" className="space-y-8">
+             <h2 className={`text-4xl md:text-6xl font-black uppercase tracking-tighter ${simulatorEnabled ? 'bg-blue-600 text-white p-4 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform rotate-1' : 'border-b-4 border-black pb-4'}`}>
+              ¿Cómo afecta el TDAH al día a día?
+            </h2>
+            <div className="space-y-6">
+              <p className={`text-xl font-medium ${simulatorEnabled ? 'bg-white border-2 border-black p-4' : ''}`}>
+                El TDAH puede influir en diferentes áreas de la vida cotidiana del niño, niña o adolescente,
+                afectando al ámbito académico, social, emocional y familiar (Frontiers in Psychiatry, 2024).
+              </p>
+  
+              <div className={`grid md:grid-cols-2 gap-8 ${simulatorEnabled ? '' : 'grid-cols-1 md:grid-cols-1'}`}>
+                <div className={`p-6 ${simulatorEnabled ? 'bg-yellow-300 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
+                  <h3 className="font-bold text-2xl mb-4 underline decoration-4">En el colegio</h3>
+                  <p className="mb-4">El alumnado con TDAH puede presentar dificultades para mantener la atención, seguir instrucciones, organizar tareas, gestionar el tiempo o finalizar actividades escolares (DuPaul & Stoner, 2020).</p>
+                  <p className="mb-4">Estas dificultades pueden repercutir en el rendimiento académico y generar sentimientos de frustración o desmotivación si no existen apoyos ajustados a sus necesidades (Grupo de Trabajo de la Guía de Práctica Clínica sobre TDAH, 2010).</p>
+                  <div className={`mt-6 p-4 ${simulatorEnabled ? 'bg-white border-2 border-black' : 'border-t-2 border-black mt-4'}`}>
+                    <h4 className="font-bold mb-2">¿Qué puede ayudar?</h4>
+                    <ul className="space-y-1 text-sm font-bold">
+                      <li>✔ Tareas fragmentadas</li>
+                      <li>✔ Instrucciones claras y breves</li>
+                      <li>✔ Horarios visuales</li>
+                      <li>✔ Adaptaciones metodológicas</li>
+                      <li>✔ Refuerzo positivo</li>
+                    </ul>
+                    <p className="text-xs mt-2 opacity-70">(DuPaul & Stoner, 2020)</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className={`p-6 ${simulatorEnabled ? 'bg-pink-400 text-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
-                <h3 className="font-bold text-2xl mb-4 underline decoration-4">En las relaciones sociales</h3>
-                <p className="mb-4">Muchos niños y adolescentes con TDAH pueden encontrar dificultades para interpretar señales sociales, respetar turnos o regular su comportamiento en situaciones grupales debido a la impulsividad y a las dificultades en autorregulación (American Psychiatric Association, 2022; Barkley, 2015).</p>
-                <p className="mb-4">Como consecuencia, algunos menores pueden experimentar conflictos con iguales, rechazo social o dificultades para mantener amistades estables (Miranda et al., 2014).</p>
-                <p>Estas experiencias pueden afectar negativamente a la autoestima y al bienestar emocional (Grupo de Trabajo de la Guía de Práctica Clínica sobre TDAH, 2010).</p>
-              </div>
-
-              <div className={`p-6 md:col-span-2 ${simulatorEnabled ? 'bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
-                <h3 className="font-bold text-2xl mb-4 underline decoration-4">En casa</h3>
-                <p className="mb-4">El TDAH también influye en la dinámica familiar. Muchas familias deben aumentar la supervisión del menor, estructurar rutinas y ofrecer apoyo constante en tareas escolares, organización personal o gestión emocional (Centta, 2024).</p>
-                <p>Esta situación puede generar estrés parental, cansancio y sobrecarga emocional, especialmente cuando no existe suficiente apoyo o información (Current Psychology, 2024).</p>
+  
+                <div className={`p-6 ${simulatorEnabled ? 'bg-pink-400 text-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
+                  <h3 className="font-bold text-2xl mb-4 underline decoration-4">En las relaciones sociales</h3>
+                  <p className="mb-4">Muchos niños y adolescentes con TDAH pueden encontrar dificultades para interpretar señales sociales, respetar turnos o regular su comportamiento en situaciones grupales debido a la impulsividad y a las dificultades en autorregulación (American Psychiatric Association, 2022; Barkley, 2015).</p>
+                  <p className="mb-4">Como consecuencia, algunos menores pueden experimentar conflictos con iguales, rechazo social o dificultades para mantener amistades estables (Miranda et al., 2014).</p>
+                  <p>Estas experiencias pueden afectar negativamente a la autoestima y al bienestar emocional (Grupo de Trabajo de la Guía de Práctica Clínica sobre TDAH, 2010).</p>
+                </div>
+  
+                <div className={`p-6 md:col-span-2 ${simulatorEnabled ? 'bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : 'border-2 border-black'}`}>
+                  <h3 className="font-bold text-2xl mb-4 underline decoration-4">En casa</h3>
+                  <p className="mb-4">El TDAH también influye en la dinámica familiar. Muchas familias deben aumentar la supervisión del menor, estructurar rutinas y ofrecer apoyo constante en tareas escolares, organización personal o gestión emocional (Centta, 2024).</p>
+                  <p>Esta situación puede generar estrés parental, cansancio y sobrecarga emocional, especialmente cuando no existe suficiente apoyo o información (Current Psychology, 2024).</p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Section 3: Barreras */}
-        <section id="barreras" className="space-y-8">
-          <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tighter ${simulatorEnabled ? 'bg-red-500 text-white p-4 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform -rotate-1' : 'border-b-4 border-black pb-4'}`}>
-            Barreras para la participación y el bienestar
-          </h2>
-          <div className={`p-8 font-medium space-y-6 text-lg leading-relaxed ${simulatorEnabled ? 'bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative' : ''}`}>
-             {simulatorEnabled && <div className="absolute top-0 right-0 w-16 h-16 bg-red-500 border-4 border-black transform translate-x-1/2 -translate-y-1/2 rotate-12" />}
-             <p>Las dificultades asociadas al TDAH no dependen únicamente del trastorno, sino también de las características del entorno y de la disponibilidad de apoyos adecuados (World Health Organization, 2023).</p>
-             
-             <div className="grid md:grid-cols-3 gap-6 mt-8">
-                <div className={`p-4 ${simulatorEnabled ? 'border-2 border-red-500 bg-red-50' : 'border-t-2 border-black'}`}>
-                   <h3 className="font-bold text-xl mb-4 text-red-600">Barreras frecuentes en el colegio</h3>
-                   <ul className="space-y-2 text-sm font-bold">
-                     <li>❌ Clases muy largas o rígidas</li>
-                     <li>❌ Falta de adaptaciones</li>
-                     <li>❌ Exceso de exigencias atencionales</li>
-                     <li>❌ Interpretaciones erróneas del comportamiento</li>
-                   </ul>
-                   <p className="text-xs mt-4">La falta de estrategias inclusivas puede favorecer el bajo rendimiento, la frustración y la desmotivación escolar (DuPaul & Stoner, 2020).</p>
-                </div>
-                
-                <div className={`p-4 ${simulatorEnabled ? 'border-2 border-blue-500 bg-blue-50' : 'border-t-2 border-black'}`}>
-                   <h3 className="font-bold text-xl mb-4 text-blue-600">Barreras sociales</h3>
-                   <p className="text-sm">La impulsividad y las dificultades de regulación emocional pueden generar conflictos con iguales o favorecer situaciones de rechazo social (Hoza, 2007).</p>
-                </div>
-
-                <div className={`p-4 ${simulatorEnabled ? 'border-2 border-purple-500 bg-purple-50' : 'border-t-2 border-black'}`}>
-                   <h3 className="font-bold text-xl mb-4 text-purple-600">Barreras familiares</h3>
-                   <p className="text-sm">La elevada necesidad de supervisión y organización puede aumentar el estrés familiar y afectar al clima emocional del hogar (Chronis-Tuscano et al., 2016).</p>
-                </div>
-             </div>
-
-             <div className={`p-6 mt-8 font-black text-center ${simulatorEnabled ? 'bg-black text-white transform rotate-1' : 'border-4 border-black uppercase'}`}>
-               <DynamicText>Comprender el TDAH desde un enfoque inclusivo implica adaptar el entorno y reducir barreras, no solo centrarse en las dificultades individuales (World Health Organization, 2023).</DynamicText>
-             </div>
-          </div>
-        </section>
+        {selectedProfile !== 'usuario' && (
+          <section id="barreras" className="space-y-8">
+            <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tighter ${simulatorEnabled ? 'bg-red-500 text-white p-4 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform -rotate-1' : 'border-b-4 border-black pb-4'}`}>
+              Barreras para la participación y el bienestar
+            </h2>
+            <div className={`p-8 font-medium space-y-6 text-lg leading-relaxed ${simulatorEnabled ? 'bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative' : ''}`}>
+               {simulatorEnabled && <div className="absolute top-0 right-0 w-16 h-16 bg-red-500 border-4 border-black transform translate-x-1/2 -translate-y-1/2 rotate-12" />}
+               <p>Las dificultades asociadas al TDAH no dependen únicamente del trastorno, sino también de las características del entorno y de la disponibilidad de apoyos adecuados (World Health Organization, 2023).</p>
+               
+               <div className="grid md:grid-cols-3 gap-6 mt-8">
+                  <div className={`p-4 ${simulatorEnabled ? 'border-2 border-red-500 bg-red-50' : 'border-t-2 border-black'}`}>
+                     <h3 className="font-bold text-xl mb-4 text-red-600">Barreras frecuentes en el colegio</h3>
+                     <ul className="space-y-2 text-sm font-bold">
+                       <li>❌ Clases muy largas o rígidas</li>
+                       <li>❌ Falta de adaptaciones</li>
+                       <li>❌ Exceso de exigencias atencionales</li>
+                       <li>❌ Interpretaciones erróneas del comportamiento</li>
+                     </ul>
+                     <p className="text-xs mt-4">La falta de estrategias inclusivas puede favorecer el bajo rendimiento, la frustración y la desmotivación escolar (DuPaul & Stoner, 2020).</p>
+                  </div>
+                  
+                  <div className={`p-4 ${simulatorEnabled ? 'border-2 border-blue-500 bg-blue-50' : 'border-t-2 border-black'}`}>
+                     <h3 className="font-bold text-xl mb-4 text-blue-600">Barreras sociales</h3>
+                     <p className="text-sm">La impulsividad y las dificultades de regulación emocional pueden generar conflictos con iguales o favorecer situaciones de rechazo social (Hoza, 2007).</p>
+                  </div>
+  
+                  <div className={`p-4 ${simulatorEnabled ? 'border-2 border-purple-500 bg-purple-50' : 'border-t-2 border-black'}`}>
+                     <h3 className="font-bold text-xl mb-4 text-purple-600">Barreras familiares</h3>
+                     <p className="text-sm">La elevada necesidad de supervisión y organización puede aumentar el estrés familiar y afectar al clima emocional del hogar (Chronis-Tuscano et al., 2016).</p>
+                  </div>
+               </div>
+  
+               <div className={`p-6 mt-8 font-black text-center ${simulatorEnabled ? 'bg-black text-white transform rotate-1' : 'border-4 border-black uppercase'}`}>
+                 <DynamicText>Comprender el TDAH desde un enfoque inclusivo implica adaptar el entorno y reducir barreras, no solo centrarse en las dificultades individuales (World Health Organization, 2023).</DynamicText>
+               </div>
+            </div>
+          </section>
+        )}
 
         {/* Section 4: Estrategias */}
         <section id="estrategias" className="space-y-8 relative">
@@ -551,12 +555,12 @@ export default function App() {
               <div className="flex items-center gap-2 font-mono text-xs">
                 <span className="font-black border-2 border-black bg-black text-[#00FF41] px-2.5 py-1.5 uppercase shrink-0">
                   {
-                    selectedAgeRange === 'p1' ? '👶 1 Ciclo Primaria' : 
-                    selectedAgeRange === 'p2' ? '👶 2 Ciclo Primaria' : 
-                    selectedAgeRange === 'p3' ? '👶 3 Ciclo Primaria' : 
-                    selectedAgeRange === 'b1' ? '🎒 1 Ciclo Batxiller' : 
-                    selectedAgeRange === 'b2' ? '🎒 2 Ciclo Bachi' : 
-                    '🎓 De 18 a 21'
+                    selectedAgeRange === 'p1' ? '👶 1º Ciclo Primaria (6-8 años)' : 
+                    selectedAgeRange === 'p2' ? '👶 2º Ciclo Primaria (8-10 años)' : 
+                    selectedAgeRange === 'p3' ? '👶 3º Ciclo Primaria (10-12 años)' : 
+                    selectedAgeRange === 'b1' ? '🎒 1º Ciclo Batxiller (16-17 años)' : 
+                    selectedAgeRange === 'b2' ? '🎒 2º Ciclo Bachi (17-18 años)' : 
+                    '🎓 De 18 a 21 años (18-21 años)'
                   }
                 </span>
               </div>
@@ -570,7 +574,7 @@ export default function App() {
                 className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'p1' ? 'bg-[#00FF41] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
                 {selectedAgeRange === 'p1' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#00FF41] border border-black"></span></span>}
-                1 Primaria
+                1º Ciclo Primaria (6-8)
               </button>
               <button
                 type="button"
@@ -578,7 +582,7 @@ export default function App() {
                 className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'p2' ? 'bg-[#00FF41] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
                 {selectedAgeRange === 'p2' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#00FF41] border border-black"></span></span>}
-                2 Primaria
+                2º Ciclo Primaria (8-10)
               </button>
               <button
                 type="button"
@@ -586,7 +590,7 @@ export default function App() {
                 className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'p3' ? 'bg-[#00FF41] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
                 {selectedAgeRange === 'p3' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#00FF41] border border-black"></span></span>}
-                3 Primaria
+                3º Ciclo Primaria (10-12)
               </button>
               <button
                 type="button"
@@ -594,7 +598,7 @@ export default function App() {
                 className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'b1' ? 'bg-[#FFFF00] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
                 {selectedAgeRange === 'b1' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#FFFF00] border border-black"></span></span>}
-                1 Bachi
+                1º Ciclo Batxiller (16-17)
               </button>
               <button
                 type="button"
@@ -602,7 +606,7 @@ export default function App() {
                 className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'b2' ? 'bg-[#FFFF00] text-black shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
                 {selectedAgeRange === 'b2' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-[#FFFF00] border border-black"></span></span>}
-                2 Bachi
+                2º Ciclo Bachi (17-18)
               </button>
               <button
                 type="button"
@@ -610,7 +614,7 @@ export default function App() {
                 className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${selectedAgeRange === 'a18' ? 'bg-pink-500 text-white shadow-none translate-y-[2px] translate-x-[2px]' : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none'}`}
               >
                 {selectedAgeRange === 'a18' && <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span><span className="relative inline-flex h-3 w-3 bg-pink-500 border border-black"></span></span>}
-                18 - 21
+                De 18 a 21 (18-21 años)
               </button>
             </div>
 
@@ -946,33 +950,35 @@ export default function App() {
         </section>
 
         {/* Section 5: Impacto en familia */}
-        <section id="familia" className="space-y-8">
-          <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tighter ${simulatorEnabled ? 'bg-orange-400 text-black p-4 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform -rotate-1' : 'border-b-4 border-black pb-4'}`}>
-            El impacto del TDAH en la familia
-          </h2>
-          <div className={`p-8 font-medium space-y-6 text-lg leading-relaxed ${simulatorEnabled ? 'bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : ''}`}>
-            <p>
-              El TDAH no afecta únicamente al menor, sino al conjunto del sistema familiar, influyendo en la organización, la comunicación y la gestión emocional del hogar (Centta, 2024).
-            </p>
-            <p>
-              Las familias suelen asumir mayores niveles de supervisión, anticipación de dificultades y acompañamiento constante, lo que puede aumentar la sensación de agotamiento o estrés parental (Current Psychology, 2024).
-            </p>
-            <p>
-              Además, la calidad de las dinámicas familiares puede influir en la manifestación de los síntomas, generándose una relación bidireccional entre el comportamiento del menor y las respuestas del entorno familiar (González Monzón, 2025).
-            </p>
-            
-            <div className={`mt-8 p-6 ${simulatorEnabled ? 'bg-orange-100 border-l-8 border-orange-500' : 'border-t-2 border-black mt-4'}`}>
-              <h3 className="font-bold text-2xl mb-4">¿Qué puede ayudar a las familias?</h3>
-              <ul className="space-y-2 font-bold font-mono text-lg">
-                <li>✔ Rutinas claras</li>
-                <li>✔ Comunicación breve y positiva</li>
-                <li>✔ Refuerzo positivo inmediato</li>
-                <li>✔ Organización del entorno</li>
-                <li>✔ Apoyo profesional cuando sea necesario</li>
-              </ul>
+        {selectedProfile !== 'usuario' && (
+          <section id="familia" className="space-y-8">
+            <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tighter ${simulatorEnabled ? 'bg-orange-400 text-black p-4 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transform -rotate-1' : 'border-b-4 border-black pb-4'}`}>
+              El impacto del TDAH en la familia
+            </h2>
+            <div className={`p-8 font-medium space-y-6 text-lg leading-relaxed ${simulatorEnabled ? 'bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : ''}`}>
+              <p>
+                El TDAH no afecta únicamente al menor, sino al conjunto del sistema familiar, influyendo en la organización, la comunicación y la gestión emocional del hogar (Centta, 2024).
+              </p>
+              <p>
+                Las familias suelen asumir mayores niveles de supervisión, anticipación de dificultades y acompañamiento constante, lo que puede aumentar la sensación de agotamiento o estrés parental (Current Psychology, 2024).
+              </p>
+              <p>
+                Además, la calidad de las dinámicas familiares puede influir en la manifestación de los síntomas, generándose una relación bidireccional entre el comportamiento del menor y las respuestas del entorno familiar (González Monzón, 2025).
+              </p>
+              
+              <div className={`mt-8 p-6 ${simulatorEnabled ? 'bg-orange-100 border-l-8 border-orange-500' : 'border-t-2 border-black mt-4'}`}>
+                <h3 className="font-bold text-2xl mb-4">¿Qué puede ayudar a las familias?</h3>
+                <ul className="space-y-2 font-bold font-mono text-lg">
+                  <li>✔ Rutinas claras</li>
+                  <li>✔ Comunicación breve y positiva</li>
+                  <li>✔ Refuerzo positivo inmediato</li>
+                  <li>✔ Organización del entorno</li>
+                  <li>✔ Apoyo profesional cuando sea necesario</li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         </main>
       </div>
