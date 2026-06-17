@@ -24,8 +24,9 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
       case 'p1': return '1º CICLO PRIMARIA (6-8 AÑOS)';
       case 'p2': return '2º CICLO PRIMARIA (8-10 AÑOS)';
       case 'p3': return '3º CICLO PRIMARIA (10-12 AÑOS)';
-      case 'b1': return '1º CICLO BATXILLER (16-17 AÑOS)';
-      case 'b2': return '2º CICLO BACHI (17-18 AÑOS)';
+      case 'e1': return '1ª ETAPA DE LA ESO (12-14 AÑOS)';
+      case 'e2': return '2ª ETAPA DE LA ESO (14-16 AÑOS)';
+      case 'b1': return 'ETAPA DE BACHILLER (16-18 AÑOS)';
       case 'a18': return 'DE 18 A 21 AÑOS';
       default: return '';
     }

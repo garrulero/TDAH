@@ -141,8 +141,9 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
                   { id: 'p1', label: '🎒 1º Ciclo Primaria (6-8 años)', desc: 'Estrategias de autogestión adaptadas para el primer tramo escolar.' },
                   { id: 'p2', label: '🎒 2º Ciclo Primaria (8-10 años)', desc: 'Recursos visuales y organizativos para el alumnado de ciclo medio.' },
                   { id: 'p3', label: '🎒 3º Ciclo Primaria (10-12 años)', desc: 'Preparación para la transición con técnicas de autonomía avanzada.' },
-                  { id: 'b1', label: '🏫 1º Ciclo Batxiller (16-17 años)', desc: 'Gestión del tiempo y foco para la alta exigencia académica.' },
-                  { id: 'b2', label: '🏫 2º Ciclo Bachi (17-18 años)', desc: 'Técnicas de autoinstrucción para el éxito en el tramo final universitario.' },
+                  { id: 'e1', label: '🏫 1ª Etapa de la ESO (12-14 años)', desc: 'Gestión del tiempo y foco en el inicio de la secundaria.' },
+                  { id: 'e2', label: '🏫 2ª Etapa de la ESO (14-16 años)', desc: 'Estrategias de concentración para el tramo final de la secundaria.' },
+                  { id: 'b1', label: '🎓 Etapa de Bachiller (16-18 años)', desc: 'Técnicas de autoinstrucción para la alta exigencia académica.' },
                   { id: 'a18', label: '🎓 De 18 a 21 años (18-21 años)', desc: 'Planificación madura y mitigación del caos sensorial en la vida adulta.' }
                 ].map(option => (
                   <button

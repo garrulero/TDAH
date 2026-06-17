@@ -46,6 +46,20 @@ export default function App() {
     setSimulatorEnabled(enabled);
   };
 
+  React.useEffect(() => {
+    if (selectedProfile && selectedAgeRange) {
+      if (!expandedSections['estrategias']) {
+        toggleSection('estrategias');
+      }
+      setTimeout(() => {
+        const el = document.getElementById('estrategias');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500);
+    }
+  }, [selectedProfile, selectedAgeRange]);
+
   return (
     <div 
       className={`min-h-screen w-full overflow-x-hidden transition-colors duration-500 font-sans relative 
@@ -86,6 +100,7 @@ export default function App() {
         <main className={`relative pt-40 px-6 pb-40 max-w-4xl mx-auto space-y-12 ${simulatorEnabled ? 'cursor-none' : ''}`}>
           <IntroductionPanel 
             selectedProfile={selectedProfile} 
+            selectedAgeRange={selectedAgeRange}
             simulatorEnabled={simulatorEnabled} 
           />
 
@@ -96,13 +111,17 @@ export default function App() {
             simulatorEnabled={simulatorEnabled}
           />
 
-          <SectionQueEs 
-            isOpen={expandedSections['que-es']}
-            onToggle={() => toggleSection('que-es')}
-            simulatorEnabled={simulatorEnabled}
-          />
+          {expandedSections['que-es'] && (
+            <SectionQueEs 
+              isOpen={expandedSections['que-es']}
+              onToggle={() => toggleSection('que-es')}
+              simulatorEnabled={simulatorEnabled}
+              selectedProfile={selectedProfile}
+              selectedAgeRange={selectedAgeRange}
+            />
+          )}
 
-          {selectedProfile !== 'usuario' && (
+          {selectedProfile !== 'usuario' && expandedSections['dia-a-dia'] && (
             <SectionDiaADia 
               isOpen={expandedSections['dia-a-dia']}
               onToggle={() => toggleSection('dia-a-dia')}
@@ -110,7 +129,7 @@ export default function App() {
             />
           )}
 
-          {selectedProfile !== 'usuario' && (
+          {selectedProfile !== 'usuario' && expandedSections['barreras'] && (
             <SectionBarreras 
               isOpen={expandedSections['barreras']}
               onToggle={() => toggleSection('barreras')}
@@ -127,16 +146,18 @@ export default function App() {
             />
           )}
 
-          <SectionEstrategias 
-            isOpen={expandedSections['estrategias']}
-            onToggle={() => toggleSection('estrategias')}
-            simulatorEnabled={simulatorEnabled}
-            selectedProfile={selectedProfile}
-            selectedAgeRange={selectedAgeRange}
-            setSelectedAgeRange={setSelectedAgeRange}
-          />
+          {expandedSections['estrategias'] && (
+            <SectionEstrategias 
+              isOpen={expandedSections['estrategias']}
+              onToggle={() => toggleSection('estrategias')}
+              simulatorEnabled={simulatorEnabled}
+              selectedProfile={selectedProfile}
+              selectedAgeRange={selectedAgeRange}
+              setSelectedAgeRange={setSelectedAgeRange}
+            />
+          )}
 
-          {selectedProfile !== 'usuario' && (
+          {selectedProfile !== 'usuario' && expandedSections['familia'] && (
             <SectionFamilia 
               isOpen={expandedSections['familia']}
               onToggle={() => toggleSection('familia')}

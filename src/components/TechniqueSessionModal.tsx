@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ArrowRight, CheckCircle2, Heart, Sparkles, Zap, Pause, Play } from 'lucide-react';
+import { X, ArrowRight, CheckCircle2, Heart, Sparkles, Zap, Pause, Play, Timer, ArrowDownToLine } from 'lucide-react';
 
 interface Technique {
   title: string;
   desc: string;
   steps: string[];
   example?: string;
+  durations?: number[];
+  repetitions?: number;
 }
 
 interface TechniqueSessionModalProps {
@@ -15,6 +17,7 @@ interface TechniqueSessionModalProps {
   onClose: () => void;
   technique: Technique | null;
   category: 'generales' | 'relajacion' | 'concentracion';
+  selectedAgeRange?: string | null;
 }
 
 const MOTIVATIONAL_PHRASES = [
@@ -26,36 +29,48 @@ const MOTIVATIONAL_PHRASES = [
   "¡Sigue así! Estás entrenando tu atención."
 ];
 
-const STEP_DURATION_MS = 8000;
+const DEFAULT_STEP_DURATION_MS = 8000;
 
 export const TechniqueSessionModal: React.FC<TechniqueSessionModalProps> = ({
   isOpen,
   onClose,
   technique,
-  category
+  category,
+  selectedAgeRange
 }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentRepetition, setCurrentRepetition] = useState(1);
   const [randomPhrase, setRandomPhrase] = useState("");
   const [stepProgress, setStepProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(0);
 
   const stepsLength = technique?.steps.length || 0;
-  const isDone = currentStepIndex === stepsLength;
+  const isDone = currentRepetition > (technique?.repetitions || 1) && currentStepIndex === 0;
 
   const handleNext = useCallback(() => {
-    if (currentStepIndex < stepsLength) {
+    if (currentStepIndex < stepsLength - 1) {
       setCurrentStepIndex(prev => prev + 1);
+    } else {
+      if (technique?.repetitions && currentRepetition < technique.repetitions) {
+        setCurrentRepetition(prev => prev + 1);
+        setCurrentStepIndex(0);
+      } else {
+        // Mark as done
+        setCurrentRepetition((technique?.repetitions || 1) + 1);
+        setCurrentStepIndex(0);
+      }
     }
-  }, [currentStepIndex, stepsLength]);
+  }, [currentStepIndex, stepsLength, currentRepetition, technique]);
 
   useEffect(() => {
     if (isOpen) {
       setCurrentStepIndex(0);
+      setCurrentRepetition(1);
       setRandomPhrase(MOTIVATIONAL_PHRASES[Math.floor(Math.random() * MOTIVATIONAL_PHRASES.length)]);
       setIsPlaying(true);
       setStepProgress(0);
       document.body.style.overflow = 'hidden';
-      // Mueve la ventana arriba para que en moviles no se quede bugeado el scroll
       window.scrollTo({ top: 0, behavior: 'auto' });
     } else {
       document.body.style.overflow = '';
@@ -71,24 +86,44 @@ export const TechniqueSessionModal: React.FC<TechniqueSessionModalProps> = ({
   useEffect(() => {
     setRandomPhrase(MOTIVATIONAL_PHRASES[Math.floor(Math.random() * MOTIVATIONAL_PHRASES.length)]);
     setStepProgress(0);
-  }, [currentStepIndex]);
+  }, [currentStepIndex, currentRepetition]);
 
   useEffect(() => {
     if (isDone || !isPlaying) return;
 
+    const currentDurationMs = technique?.durations?.[currentStepIndex] 
+      ? technique.durations[currentStepIndex] * 1000 
+      : DEFAULT_STEP_DURATION_MS;
+
+    const intervalMs = 50; // smoother updates
+    const increment = 100 / (currentDurationMs / intervalMs);
+
     const interval = setInterval(() => {
       setStepProgress(prev => {
-        const nextProgress = prev + (100 / (STEP_DURATION_MS / 100)); // 100ms interval
+        const nextProgress = prev + increment;
         if (nextProgress >= 100) {
           handleNext();
           return 0;
         }
         return nextProgress;
       });
+    }, intervalMs);
+
+    // Update remaining time visually
+    const timeInterval = setInterval(() => {
+       setStepProgress(prev => {
+         // we just calculate time left here from progress
+         const remaining = Math.ceil(((100 - prev)/100) * (currentDurationMs / 1000));
+         setTimeLeft(remaining);
+         return prev;
+       });
     }, 100);
 
-    return () => clearInterval(interval);
-  }, [isDone, isPlaying, handleNext]);
+    return () => {
+      clearInterval(interval);
+      clearInterval(timeInterval);
+    };
+  }, [isDone, isPlaying, handleNext, currentStepIndex, technique]);
 
   if (!isOpen || !technique) return null;
 
@@ -142,9 +177,16 @@ export const TechniqueSessionModal: React.FC<TechniqueSessionModalProps> = ({
               className="max-w-4xl w-full flex flex-col items-center justify-center h-full max-h-[80vh]"
             >
               <div className="w-full flex justify-between items-end mb-2 px-2">
-                 <div className="font-mono font-black uppercase text-xs sm:text-sm bg-black text-[#00FF41] px-3 py-1 border-2 border-black">
-                  PASO {currentStepIndex + 1} / {stepsLength}
-                </div>
+                 <div className="flex gap-2">
+                   <div className="font-mono font-black uppercase text-xs sm:text-sm bg-black text-[#00FF41] px-3 py-1 border-2 border-black">
+                    PASO {currentStepIndex + 1} / {stepsLength}
+                  </div>
+                  {technique.repetitions && (
+                    <div className="font-mono font-black text-xs sm:text-sm bg-white text-black px-3 py-1 border-2 border-black inline-flex items-center gap-1">
+                      <ArrowDownToLine size={14} className="animate-bounce" /> VUELTA {currentRepetition} / {technique.repetitions}
+                    </div>
+                  )}
+                 </div>
                 <button 
                   onClick={() => setIsPlaying(!isPlaying)}
                   className="bg-white border-2 border-black p-2 hover:bg-neutral-100 active:bg-neutral-200 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
@@ -155,8 +197,28 @@ export const TechniqueSessionModal: React.FC<TechniqueSessionModalProps> = ({
               </div>
 
               <div className="bg-white border-8 border-black p-6 sm:p-12 md:p-16 w-full shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] relative flex flex-col items-center justify-center min-h-[40vh] sm:min-h-[50vh] overflow-hidden">
+                {/* Primary Student Mascot / Countdown overlay */}
+                <div className="absolute top-4 right-4 flex flex-col sm:flex-row items-center gap-3">
+                  {(selectedAgeRange === 'p1' || selectedAgeRange === 'p2' || selectedAgeRange === 'p3') && (technique.durations) && (
+                     <motion.div 
+                        animate={{ y: [0, -5, 0], scale: [1, 1.05, 1] }} 
+                        transition={{ repeat: Infinity, duration: 2 }}
+                        className="text-4xl sm:text-5xl"
+                        title="Tu compañero de ejercicio"
+                     >
+                        {category === 'relajacion' ? '🐢' : '🦉'}
+                     </motion.div>
+                  )}
+                  {technique.durations && isPlaying && (
+                     <div className="bg-neutral-100 border-4 border-black px-4 py-2 font-mono font-black text-xl sm:text-2xl flex items-center gap-2 tabular-nums">
+                        <Timer size={24} className="animate-pulse" />
+                        {timeLeft}s
+                     </div>
+                  )}
+                </div>
+
                 <div className="flex-1 flex flex-col items-center w-full overflow-y-auto custom-scrollbar pb-6 pr-2">
-                  <div className="my-auto w-full">
+                  <div className="my-auto w-full pt-12 sm:pt-4">
                     <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight sm:leading-snug text-center mx-auto max-w-3xl">
                       <span className="text-pink-500 mr-4">{currentStepIndex + 1}.</span>
                       {technique.steps[currentStepIndex]}
