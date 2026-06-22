@@ -7,6 +7,7 @@ import {
   concentracionParams,
 } from "./InteractiveTechniques";
 import { TechniqueSessionModal } from "./TechniqueSessionModal";
+import { adaptDescription, adaptSteps } from "../lib/adaptations";
 
 interface SectionEstrategiasProps {
   isOpen: boolean;
@@ -95,19 +96,13 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
   };
 
   const getAdaptationModifierText = () => {
-    if (['p1', 'p2', 'p3'].includes(selectedAgeRange || '')) {
-      return "(ADAPTACIÓN PRIMARIA: Instrucciones cortas, uso de apoyos visuales muy claros y mantener tareas breves en forma de juego. El adulto guía gran parte del proceso).";
-    } else if (['e1', 'e2', 'b1'].includes(selectedAgeRange || '')) {
-      return "(ADAPTACIÓN SECUNDARIA/BACHILLER OBLIGATORIO: Fomentar que el adolescente tome la iniciativa en la planificación, usar herramientas digitales y calendarios con el adulto como supervisor distante).";
-    } else if (selectedAgeRange === 'a18') {
-      return "(ADAPTACIÓN ADULTO: Enfoque 100% en autonomía. Uso proactivo de bloqueadores de sitios web, agendas complejas y alarmas personales de prevención de hiperfoco).";
-    }
-    return "";
+    return ""; // handled natively
   };
 
   const adaptItem = (item: any) => ({
     ...item,
-    desc: `${item.desc} ${getAdaptationModifierText()}`
+    desc: adaptDescription(item.title, item.desc, selectedAgeRange),
+    steps: adaptSteps(item.steps, selectedAgeRange)
   });
 
   const allStrategies = [
@@ -162,7 +157,7 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
           {allStrategies.map((strategy, idx) => (
             <div key={idx} className="border-4 border-black bg-white">
               <button
-                onClick={() => setOpenStrategy(strategy.title)}
+                onClick={() => setOpenStrategy(openStrategy === strategy.title ? null : strategy.title)}
                 className="w-full p-4 flex items-center justify-between hover:bg-neutral-100 transition-colors text-left font-black uppercase text-lg sm:text-xl tracking-tight cursor-pointer"
               >
                 <div className="flex items-center gap-3">
@@ -170,110 +165,89 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
                   {strategy.title}
                 </div>
                 <span className="font-mono text-sm bg-black text-[#00FF41] px-2 py-1 shrink-0">
-                  VER [+]
+                  {openStrategy === strategy.title ? "CERRAR [-]" : "VER [+]"}
                 </span>
               </button>
+
+              {openStrategy === strategy.title && (
+                <div className="p-4 sm:p-6 md:p-8 border-t-4 border-black bg-neutral-50 animate-[fade-in_0.2s_ease]">
+                  {!strategy.isGroup ? (
+                    <div>
+                      <p className="text-lg sm:text-xl md:text-2xl font-bold leading-relaxed mb-6">
+                        {strategy.desc}
+                      </p>
+                      
+                      {selectedProfile === "padre" && (
+                        <div className="bg-orange-100 p-4 sm:p-6 border-4 border-black mb-8">
+                          <h4 className="font-black uppercase text-xl text-orange-700 mb-3">
+                            ¿Cómo ayudar desde casa?
+                          </h4>
+                          <p className="font-medium text-base sm:text-lg">
+                            Guía el proceso haciéndolo tú primero (modelado) y
+                            luego deja que lo intenten ellos. Reduce tu ayuda
+                            progresivamente, ofreciendo apoyo visual en lugar de
+                            recordarlo todo verbalmente.
+                          </p>
+                        </div>
+                      )}
+                      
+                      <div className="bg-neutral-50 border-4 border-black p-4 sm:p-8 mb-8">
+                        <h4 className="font-black font-mono text-lg sm:text-xl uppercase mb-6 bg-black text-[#00FF41] inline-block px-4 py-2">
+                          Pasos a seguir:
+                        </h4>
+                        <ul className="list-decimal pl-6 font-bold text-base sm:text-lg space-y-4">
+                          {(strategy as any).steps?.map((step: string, sIdx: number) => (
+                            <li key={sIdx} className="pl-2">{step}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      {(strategy as any).example && (
+                        <div className="bg-yellow-100 p-4 sm:p-6 border-4 border-black font-mono text-base sm:text-lg font-bold">
+                          <span className="text-xl mr-2">💡</span> EJEMPLO: {(strategy as any).example}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="space-y-8">
+                      <p className="font-medium text-lg sm:text-xl bg-cyan-100 border-4 border-black p-4">
+                        Haz clic en "Iniciar Sesión" para abrir el reproductor y
+                        guiar tu práctica paso a paso.
+                      </p>
+                      <div className="grid gap-6">
+                        {(strategy as any).items.map((subItem: any, subIdx: number) => (
+                          <div
+                            key={subIdx}
+                            className="bg-white border-4 border-black p-4 sm:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all"
+                          >
+                            <div className="flex-1">
+                              <h5 className="font-black uppercase text-xl sm:text-2xl mb-2 text-pink-600">
+                                {subItem.title}
+                              </h5>
+                              <p className="text-base sm:text-lg font-bold leading-tight">
+                                {subItem.desc}
+                              </p>
+                            </div>
+                            <button
+                              onClick={() => {
+                                setSelectedTechnique(subItem);
+                                setSessionModalOpen(true);
+                              }}
+                              className="bg-black text-[#00FF41] border-4 border-black px-6 py-4 uppercase font-black shrink-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-none transition-all cursor-pointer w-full md:w-auto text-lg"
+                            >
+                              ▶ Iniciar sesión
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
       </div>
-
-      {openStrategy && (() => {
-        const strategy = allStrategies.find(s => s.title === openStrategy);
-        if (!strategy) return null;
-        
-        return (
-          <div className="fixed inset-0 z-[9999] bg-white flex flex-col pt-12 sm:pt-0 overflow-hidden text-black pb-[env(safe-area-inset-bottom)]">
-            <div className="flex justify-between items-center p-4 border-b-8 border-black bg-[#00FF41] shrink-0">
-               <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight truncate pr-4">
-                 {strategy.title}
-               </h3>
-               <button 
-                 onClick={() => setOpenStrategy(null)}
-                 className="shrink-0 bg-white border-4 border-black p-2 hover:bg-black hover:text-white transition-colors cursor-pointer"
-               >
-                 CERRAR [X]
-               </button>
-            </div>
-            
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-12 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/notebook.png')]">
-              <div className="max-w-4xl mx-auto space-y-8 bg-white border-4 sm:border-8 border-black p-4 sm:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                {!strategy.isGroup ? (
-                   <div>
-                     <p className="text-lg sm:text-xl md:text-2xl font-bold leading-relaxed mb-6">
-                       {strategy.desc}
-                     </p>
-                     
-                     {selectedProfile === "padre" && (
-                       <div className="bg-orange-100 p-4 sm:p-6 border-4 border-black mb-8">
-                         <h4 className="font-black uppercase text-xl text-orange-700 mb-3">
-                           ¿Cómo ayudar desde casa?
-                         </h4>
-                         <p className="font-medium text-base sm:text-lg">
-                           Guía el proceso haciéndolo tú primero (modelado) y
-                           luego deja que lo intenten ellos. Reduce tu ayuda
-                           progresivamente, ofreciendo apoyo visual en lugar de
-                           recordarlo todo verbalmente.
-                         </p>
-                       </div>
-                     )}
-                     
-                     <div className="bg-neutral-50 border-4 border-black p-4 sm:p-8 mb-8">
-                       <h4 className="font-black font-mono text-lg sm:text-xl uppercase mb-6 bg-black text-[#00FF41] inline-block px-4 py-2">
-                         Pasos a seguir:
-                       </h4>
-                       <ul className="list-decimal pl-6 font-bold text-base sm:text-lg space-y-4">
-                         {(strategy as any).steps?.map((step: string, sIdx: number) => (
-                           <li key={sIdx} className="pl-2">{step}</li>
-                         ))}
-                       </ul>
-                     </div>
-                     
-                     {(strategy as any).example && (
-                       <div className="bg-yellow-100 p-4 sm:p-6 border-4 border-black font-mono text-base sm:text-lg font-bold">
-                         <span className="text-xl mr-2">💡</span> EJEMPLO: {(strategy as any).example}
-                       </div>
-                     )}
-                   </div>
-                ) : (
-                   <div className="space-y-8">
-                     <p className="font-medium text-lg sm:text-xl bg-cyan-100 border-4 border-black p-4">
-                       Haz clic en "Iniciar Sesión" para abrir el reproductor y
-                       guiar tu práctica paso a paso.
-                     </p>
-                     <div className="grid gap-6">
-                       {(strategy as any).items.map((subItem: any, subIdx: number) => (
-                         <div
-                           key={subIdx}
-                           className="bg-white border-4 border-black p-4 sm:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all"
-                         >
-                           <div className="flex-1">
-                             <h5 className="font-black uppercase text-xl sm:text-2xl mb-2 text-pink-600">
-                               {subItem.title}
-                             </h5>
-                             <p className="text-base sm:text-lg font-bold leading-tight">
-                               {subItem.desc}
-                             </p>
-                           </div>
-                           <button
-                             onClick={() => {
-                               setSelectedTechnique(subItem);
-                               setSessionModalOpen(true);
-                             }}
-                             className="bg-black text-[#00FF41] border-4 border-black px-6 py-4 uppercase font-black shrink-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 active:translate-y-0 active:shadow-none transition-all cursor-pointer w-full md:w-auto text-lg"
-                           >
-                             ▶ Iniciar sesión
-                           </button>
-                         </div>
-                       ))}
-                     </div>
-                   </div>
-                )}
-              </div>
-            </div>
-          </div>
-        );
-      })()}
 
       <TechniqueSessionModal
         isOpen={sessionModalOpen}
