@@ -84,23 +84,54 @@ export const SectionQueEs: React.FC<SectionQueEsProps> = ({
           </>
         )}
 
-        <div className={`${showOnlyVideo ? '' : 'mt-8'} border-4 border-black bg-cyan-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-6 flex flex-col sm:flex-row items-center justify-between gap-6`}>
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
+        <div className={`${showOnlyVideo ? '' : 'mt-8'} border-4 border-black bg-cyan-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-6 flex flex-col items-center justify-center gap-6`}>
+          <div className="flex-1 w-full text-center mb-2">
+            <div className="flex items-center justify-center gap-3 mb-2">
               <span className="text-3xl">🎬</span>
               <h3 className="font-black text-xl text-black uppercase tracking-tight">Ejemplo Práctico en Vídeo</h3>
             </div>
-            <p className="text-sm font-bold text-black">
-              Inicia el reproductor interactivo para ver cómo explicamos el TDAH en la etapa: <span className="underline">{currentScript.title}</span>.
+            <p className="text-sm font-bold text-black max-w-2xl mx-auto">
+              {currentScript.title}
             </p>
           </div>
           
-          <button 
-            onClick={() => setModalOpen(true)}
-            className="w-full sm:w-auto bg-black text-white hover:bg-pink-600 border-4 border-black font-mono font-black uppercase px-6 py-4 flex items-center justify-center gap-2 transition-transform active:translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
-          >
-            <Play size={20} fill="white" /> Reproducir
-          </button>
+          {(() => {
+            const DRIVE_MAP: Record<string, string> = {
+              'padre_p1': '1Wfsj6QlYa1zgXYSJCpeKqPcbjBY6EFxc',
+              'padre_p2': '1Wfsj6QlYa1zgXYSJCpeKqPcbjBY6EFxc',
+              'padre_p3': '1Wfsj6QlYa1zgXYSJCpeKqPcbjBY6EFxc',
+              'padre_e1': '1ZHWg75d6fLHp9WMqqgHyIdcA4buTNUlx',
+              'padre_e2': '1ZHWg75d6fLHp9WMqqgHyIdcA4buTNUlx',
+              'padre_b1': '1ZHWg75d6fLHp9WMqqgHyIdcA4buTNUlx',
+              'padre_a18': '182XmXTgRuT07j95zwK66aEVm4A29FVG2',
+              'usuario_p1': '1a_NwhfUxcUnx-Ueb8lod6UAArBnHbWSw'
+            };
+            const driveId = DRIVE_MAP[`${selectedProfile}_${selectedAgeRange}`];
+
+            if (driveId) {
+              return (
+                <div className="w-full max-w-3xl aspect-video border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden bg-black">
+                  <iframe 
+                    src={`https://drive.google.com/file/d/${driveId}/preview`} 
+                    title="Google Drive video player" 
+                    className="absolute top-0 left-0 w-full h-full"
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  />
+                </div>
+              );
+            }
+
+            return (
+              <button 
+                onClick={() => setModalOpen(true)}
+                className="w-full sm:w-auto bg-black text-white hover:bg-pink-600 border-4 border-black font-mono font-black uppercase px-6 py-4 flex items-center justify-center gap-2 transition-transform active:translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+              >
+                <Play size={20} fill="white" /> Reproducir interactivo
+              </button>
+            );
+          })()}
         </div>
 
       </div>
