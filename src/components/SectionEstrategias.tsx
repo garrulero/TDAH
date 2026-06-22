@@ -7,7 +7,7 @@ import {
   concentracionParams,
 } from "./InteractiveTechniques";
 import { TechniqueSessionModal } from "./TechniqueSessionModal";
-import { adaptDescription, adaptSteps } from "../lib/adaptations";
+import { adaptDescription, adaptSteps, adaptParentInstructions } from "../lib/adaptations";
 
 interface SectionEstrategiasProps {
   isOpen: boolean;
@@ -183,10 +183,7 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
                             ¿Cómo ayudar desde casa?
                           </h4>
                           <p className="font-medium text-base sm:text-lg">
-                            Guía el proceso haciéndolo tú primero (modelado) y
-                            luego deja que lo intenten ellos. Reduce tu ayuda
-                            progresivamente, ofreciendo apoyo visual en lugar de
-                            recordarlo todo verbalmente.
+                            {adaptParentInstructions(selectedAgeRange)}
                           </p>
                         </div>
                       )}
@@ -211,8 +208,11 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
                   ) : (
                     <div className="space-y-8">
                       <p className="font-medium text-lg sm:text-xl bg-cyan-100 border-4 border-black p-4">
-                        Haz clic en "Iniciar Sesión" para abrir el reproductor y
-                        guiar tu práctica paso a paso.
+                        {selectedAgeRange === 'a18' 
+                          ? 'Inicia la sesión guiada y aparta unos minutos solo para ti.'
+                          : ['e1','e2','b1'].includes(selectedAgeRange || '')
+                            ? 'Dale a "Iniciar Sesión" para seguir la rutina de ejercicios en pantalla.'
+                            : '¡Haz clic en "Iniciar Sesión" y sigan juntos el juego en pantalla paso a paso!'}
                       </p>
                       <div className="grid gap-6">
                         {(strategy as any).items.map((subItem: any, subIdx: number) => (

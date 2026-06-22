@@ -20,14 +20,43 @@ interface TechniqueSessionModalProps {
   selectedAgeRange?: string | null;
 }
 
-const MOTIVATIONAL_PHRASES = [
-  "¡Tómate tu tiempo, lo estás haciendo genial!",
-  "Un paso cada vez. Todo suma.",
-  "Respira. Estás tomando el control.",
-  "La constancia es tu mayor superpoder.",
-  "Tu cerebro es único, dale las herramientas que necesita.",
-  "¡Sigue así! Estás entrenando tu atención."
-];
+const getMotivationalPhrases = (ageId: string | null | undefined) => {
+  if (['p1', 'p2', 'p3'].includes(ageId || '')) {
+    return [
+      "¡Qué bien lo haces! Sigue así.",
+      "Eres súper capaz, ¡vamos!",
+      "Haciéndolo genial como siempre.",
+      "Pasito a pasito, ¡tú puedes!",
+      "¡Guau, lo estás logrando!"
+    ];
+  }
+  if (['e1', 'e2', 'b1'].includes(ageId || '')) {
+    return [
+      "No te agobies, ve a tu ritmo.",
+      "Poco a poco se llega lejos.",
+      "Estás entrenando tu atención, ¡sigue!",
+      "Tomarte tu tiempo es de listos.",
+      "Cada paso cuenta, buen trabajo."
+    ];
+  }
+  if (ageId === 'a18') {
+    return [
+      "Respira. Estás retomando tu control.",
+      "La constancia siempre es clave.",
+      "Un descanso a tiempo evita el agobio.",
+      "Minimizar distracciones es el primer paso.",
+      "Prioriza tu paz mental en este rato."
+    ];
+  }
+  return [
+      "¡Tómate tu tiempo, lo estás haciendo genial!",
+      "Un paso cada vez. Todo suma.",
+      "Respira. Estás tomando el control.",
+      "La constancia es tu mayor superpoder.",
+      "Tu cerebro es único, dale las herramientas que necesita.",
+      "¡Sigue así! Estás entrenando tu atención."
+  ];
+}
 
 const DEFAULT_STEP_DURATION_MS = 8000;
 
@@ -67,7 +96,8 @@ export const TechniqueSessionModal: React.FC<TechniqueSessionModalProps> = ({
     if (isOpen) {
       setCurrentStepIndex(0);
       setCurrentRepetition(1);
-      setRandomPhrase(MOTIVATIONAL_PHRASES[Math.floor(Math.random() * MOTIVATIONAL_PHRASES.length)]);
+      const phrases = getMotivationalPhrases(selectedAgeRange);
+      setRandomPhrase(phrases[Math.floor(Math.random() * phrases.length)]);
       setIsPlaying(true);
       setStepProgress(0);
       document.body.style.overflow = 'hidden';
@@ -75,7 +105,7 @@ export const TechniqueSessionModal: React.FC<TechniqueSessionModalProps> = ({
     } else {
       document.body.style.overflow = '';
     }
-  }, [isOpen]);
+  }, [isOpen, selectedAgeRange]);
 
   useEffect(() => {
     return () => {
@@ -84,9 +114,10 @@ export const TechniqueSessionModal: React.FC<TechniqueSessionModalProps> = ({
   }, []);
 
   useEffect(() => {
-    setRandomPhrase(MOTIVATIONAL_PHRASES[Math.floor(Math.random() * MOTIVATIONAL_PHRASES.length)]);
+    const phrases = getMotivationalPhrases(selectedAgeRange);
+    setRandomPhrase(phrases[Math.floor(Math.random() * phrases.length)]);
     setStepProgress(0);
-  }, [currentStepIndex, currentRepetition]);
+  }, [currentStepIndex, currentRepetition, selectedAgeRange]);
 
   useEffect(() => {
     if (isDone || !isPlaying) return;

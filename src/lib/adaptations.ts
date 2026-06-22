@@ -95,6 +95,30 @@ export const adaptDescription = (title: string, originalDesc: string, ageId: str
   return originalDesc;
 };
 
+export const adaptParentInstructions = (ageId: string | null) => {
+  const isPrimaria = ['p1', 'p2', 'p3'].includes(ageId || '');
+  const isSecundaria = ['e1', 'e2', 'b1'].includes(ageId || '');
+  const isAdulto = ageId === 'a18';
+
+  if (!ageId) {
+    return 'Guía el proceso haciéndolo tú primero (modelado) y luego deja que lo intenten ellos. Reduce tu ayuda progresivamente, ofreciendo apoyo visual en lugar de recordarlo todo verbalmente.';
+  }
+
+  if (isPrimaria) {
+    return 'En estas edades, los niños necesitan mucho modelado. Haz la técnica tú primero como si fuera un juego para que te imiten. Felicítalo mucho en cada pequeño logro y usa muchos apoyos visuales (dibujos, relojes de arena, pegatinas) para que lo entienda sin que tengas que darle tantas explicaciones largas que le aburran.';
+  }
+
+  if (isSecundaria) {
+    return 'En esta etapa tu rol es de supervisor en la sombra. Deja que intente organizarse o aplicar la técnica a su ritmo, cometiendo errores si hace falta. No se lo hagas tú. En lugar de recordarle las cosas hablando (que probablemente le moleste), ofrécele opciones y herramientas (apps, calendarios) y negocia acuerdos sobre cuándo revisar juntos los progresos.';
+  }
+
+  if (isAdulto) {
+    return 'En la etapa adulta no es necesaria tu intervención directa. Como adulto cercano, el mejor apoyo es el respeto a su espacio y a sus mecanismos de concentración. Puedes ayudar reduciendo el ruido ambiental, respetando los "bloqueos de tiempo" para trabajar que te indique y animando a buscar entornos y sistemas que funcionen, sin fiscalizar su manera particular de planificarse.';
+  }
+
+  return 'Guía el proceso progresivamente, ofreciendo el apoyo adecuado que necesiten.';
+};
+
 export const adaptSteps = (steps: string[] | undefined, ageId: string | null) => {
   if (!steps) return [];
   const isPrimaria = ['p1', 'p2', 'p3'].includes(ageId || '');
