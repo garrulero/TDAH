@@ -50,9 +50,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               </h3>
               
               <div className="space-y-2 text-sm sm:text-base font-medium text-black">
-                <p>Si tienes TDAH, <strong>este puede ser tu sitio</strong>.</p>
+                <p>Si tienes TDAH, <strong>o si eres madre, padre o conoces a alguien con TDAH</strong>, este puede ser tu sitio.</p>
                 <p>Aquí encontrarás herramientas que te ayudan en el día a día para concentrarte, organizarte y reducir las distracciones.</p>
-                <p>Y si conoces a alguien con TDAH, también puedes <strong>acompañarle</strong> desde aquí.</p>
                 <p className="font-bold pt-2">Elige la opción que mejor se adapte a ti:</p>
               </div>
 
@@ -73,7 +72,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
                   </span>
                   
                   <h4 className="text-lg sm:text-xl font-black uppercase tracking-tight mt-2 leading-none">
-                    SOY MADRE / PADRE / DOCENTE
+                    SOY MADRE / PADRE
                   </h4>
                   
                   <p className="text-[11px] sm:text-xs font-medium leading-relaxed opacity-90 my-3 flex-1">
@@ -152,7 +151,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
                   { id: 'e1', label: '🏫 1ª Etapa de la ESO (12-14 años)', desc: 'Gestión del tiempo y foco en el inicio de la secundaria.' },
                   { id: 'e2', label: '🏫 2ª Etapa de la ESO (14-16 años)', desc: 'Estrategias de concentración para el tramo final de la secundaria.' },
                   { id: 'b1', label: '🎓 Etapa de Bachiller (16-18 años)', desc: 'Técnicas de autoinstrucción para la alta exigencia académica.' },
-                  { id: 'a18', label: '🎓 De 18 a 21 años (18-21 años)', desc: 'Planificación madura y mitigación del caos sensorial.' }
+                  { id: 'a18', label: '🎓 Adulto (+18 años)', desc: 'Planificación madura y mitigación del caos sensorial.' }
                 ].map(option => (
                   <button
                     key={option.id}

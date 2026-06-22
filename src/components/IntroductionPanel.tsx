@@ -90,7 +90,7 @@ export const IntroductionPanel: React.FC<IntroductionPanelProps> = ({
       <div className="flex items-center gap-3 mb-4">
         <span className="text-3xl sm:text-4xl">{selectedProfile === 'padre' ? '👨‍👩‍👧‍👦' : '🎒'}</span>
         <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight">
-          {selectedProfile === 'padre' ? 'Bienvenido, Madre, Padre o Docente' : '¡Hola! Bienvenido a tu espacio'}
+          {selectedProfile === 'padre' ? 'Bienvenido, Madre o Padre' : '¡Hola! Bienvenido a tu espacio'}
         </h2>
       </div>
       

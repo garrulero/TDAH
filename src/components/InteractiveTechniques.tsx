@@ -285,10 +285,26 @@ export const TechniquesDictionary: React.FC<TechniquesDictionaryProps> = ({
     { id: "concentracion", label: "Técnicas de Concentración", icon: "🎯" },
   ];
 
+  const getAdaptationModifierText = () => {
+    if (['p1', 'p2', 'p3'].includes(selectedAgeRange || '')) {
+      return "(ADAPTACIÓN PRIMARIA: Instrucciones cortas, uso de apoyos visuales muy claros y mantener tareas breves en forma de juego. El adulto guía gran parte del proceso).";
+    } else if (['e1', 'e2', 'b1'].includes(selectedAgeRange || '')) {
+      return "(ADAPTACIÓN SECUNDARIA/BACHILLER OBLIGATORIO: Fomentar que el adolescente tome la iniciativa en la planificación, usar herramientas digitales y calendarios con el adulto como supervisor distante).";
+    } else if (selectedAgeRange === 'a18') {
+      return "(ADAPTACIÓN ADULTO: Enfoque 100% en autonomía. Uso proactivo de bloqueadores de sitios web, agendas complejas y alarmas personales de prevención de hiperfoco).";
+    }
+    return "";
+  };
+
+  const adaptItem = (item: any) => ({
+    ...item,
+    desc: `${item.desc} ${getAdaptationModifierText()}`
+  });
+
   const getData = () => {
-    if (activeTab === "generales") return generalesParams;
-    if (activeTab === "relajacion") return relajacionParams;
-    return concentracionParams;
+    if (activeTab === "generales") return generalesParams.map(adaptItem);
+    if (activeTab === "relajacion") return relajacionParams.map(adaptItem);
+    return concentracionParams.map(adaptItem);
   };
 
   const getAdaptationText = () => {
