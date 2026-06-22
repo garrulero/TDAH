@@ -101,7 +101,7 @@ export const IntroductionPanel: React.FC<IntroductionPanelProps> = ({
       ) : renderStudentIntro()}
 
       <div className={`text-xs font-bold font-mono uppercase p-2 inline-block border-2 ${simulatorEnabled ? 'bg-pink-500 text-white border-white' : 'bg-black text-white border-black'}`}>
-        VISTA ACTUAL: {selectedProfile === 'padre' ? 'PADRES Y EDUCADORES' : 'ALUMNO (LECTURA LIMPIA)'}
+        VISTA ACTUAL: {selectedProfile === 'padre' ? 'MADRES Y PADRES' : 'ALUMNO (LECTURA LIMPIA)'}
       </div>
     </div>
   );
