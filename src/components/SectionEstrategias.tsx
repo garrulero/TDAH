@@ -7,7 +7,7 @@ import {
   concentracionParams,
 } from "./InteractiveTechniques";
 import { TechniqueSessionModal } from "./TechniqueSessionModal";
-import { adaptDescription, adaptSteps, adaptParentInstructions } from "../lib/adaptations";
+import { adaptDescription, adaptSteps, adaptParentInstructions, adaptParentSteps } from "../lib/adaptations";
 
 interface SectionEstrategiasProps {
   isOpen: boolean;
@@ -102,7 +102,9 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
   const adaptItem = (item: any) => ({
     ...item,
     desc: adaptDescription(item.title, item.desc, selectedAgeRange),
-    steps: adaptSteps(item.steps, selectedAgeRange)
+    steps: selectedProfile === 'padre' 
+      ? adaptParentSteps(item.steps, selectedAgeRange) 
+      : adaptSteps(item.steps, selectedAgeRange)
   });
 
   const allStrategies = [

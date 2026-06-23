@@ -157,3 +157,39 @@ export const adaptSteps = (steps: string[] | undefined, ageId: string | null) =>
 
   return steps;
 };
+
+export const adaptParentSteps = (steps: string[] | undefined, ageId: string | null) => {
+  if (!steps) return [];
+  
+  return steps.map(s => {
+    let adapted = s
+      .replace(/^El adulto modela/i, 'Modela tú primero')
+      .replace(/^La persona realiza/i, 'Pídele que realice')
+      .replace(/^Posteriormente verbaliza/i, 'Anímale a que verbalice')
+      .replace(/^Finalmente interioriza/i, 'Ayúdale a interiorizar')
+      .replace(/^Identificar /i, 'Ayúdale a identificar ')
+      .replace(/^Ordenar /i, 'Guiarle para ordenar ')
+      .replace(/^Establecer /i, 'Definid juntos o ayúdale a establecer ')
+      .replace(/^Utilizar /i, 'Acompáñale en el uso de ')
+      .replace(/^Estimar /i, 'Animarle a estimar ')
+      .replace(/^Alternar /i, 'Asegúrate de que alterna ')
+      .replace(/^Usar /i, 'Proporciónale y enséñale a usar ')
+      .replace(/^Tras la actividad se revisa/i, 'Revisad juntos tras la actividad')
+      .replace(/^Analizar /i, 'Analizad juntos ')
+      .replace(/^Proponer /i, 'Animarle a proponer ')
+      .replace(/^Reforzar /i, 'Refuerza tú ')
+      .replace(/^Reducir /i, 'Ve reduciendo ')
+      .replace(/^Retirar /i, 'Ve retirando ')
+      .replace(/^Elegir /i, 'Ayúdale a elegir ')
+      .replace(/^Inspirar /i, 'Pídele que inspire ')
+      .replace(/^Mantener /i, 'Indícale que mantenga ')
+      .replace(/^Expulsar /i, 'Pídele que expulse ')
+      .replace(/^Tensar /i, 'Guíale para que tense ')
+      .replace(/^Relajar /i, 'Indícale que relaje ')
+      .replace(/^Concentrarse /i, 'Ayúdale a concentrarse ')
+      .replace(/^Prestar atención /i, 'Anímale a prestar atención ')
+      .replace(/^Dividir /i, 'Ayúdale a dividir ');
+
+    return adapted;
+  });
+};
