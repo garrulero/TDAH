@@ -31,7 +31,16 @@ export const MainIndex: React.FC<MainIndexProps> = ({
         
         {/* Index 01: ¿Qué es el TDAH? */}
         <button 
-          onClick={() => toggleSection('que-es')}
+          onClick={() => {
+            if (!expandedSections['que-es']) {
+              toggleSection('que-es');
+              setTimeout(() => {
+                document.getElementById('que-es')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            } else {
+              toggleSection('que-es');
+            }
+          }}
           className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer ${
             expandedSections['que-es'] 
               ? 'bg-[#00FF41] text-black shadow-none' 
@@ -50,7 +59,16 @@ export const MainIndex: React.FC<MainIndexProps> = ({
         {/* Index 02: ¿Cómo afecta el TDAH al día a día? (Only parents) */}
         {selectedProfile !== 'usuario' ? (
           <button 
-            onClick={() => toggleSection('dia-a-dia')}
+            onClick={() => {
+              if (!expandedSections['dia-a-dia']) {
+                toggleSection('dia-a-dia');
+                setTimeout(() => {
+                  document.getElementById('dia-a-dia')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              } else {
+                toggleSection('dia-a-dia');
+              }
+            }}
             className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer ${
               expandedSections['dia-a-dia'] 
                 ? 'bg-blue-400 text-white shadow-none font-black border-black' 
@@ -76,7 +94,16 @@ export const MainIndex: React.FC<MainIndexProps> = ({
         {/* Index 03: Barreras (Only parents) */}
         {selectedProfile !== 'usuario' ? (
           <button 
-            onClick={() => toggleSection('barreras')}
+            onClick={() => {
+              if (!expandedSections['barreras']) {
+                toggleSection('barreras');
+                setTimeout(() => {
+                  document.getElementById('barreras')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              } else {
+                toggleSection('barreras');
+              }
+            }}
             className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer ${
               expandedSections['barreras'] 
                 ? 'bg-red-500 text-white shadow-none font-black border-black' 
@@ -101,7 +128,16 @@ export const MainIndex: React.FC<MainIndexProps> = ({
 
         {/* Index 04: Estrategias de autogestión */}
         <button 
-          onClick={() => toggleSection('estrategias')}
+          onClick={() => {
+            if (!expandedSections['estrategias']) {
+              toggleSection('estrategias');
+              setTimeout(() => {
+                document.getElementById('estrategias')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            } else {
+              toggleSection('estrategias');
+            }
+          }}
           className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer ${
             expandedSections['estrategias'] 
               ? 'bg-yellow-300 text-black shadow-none' 
@@ -122,8 +158,17 @@ export const MainIndex: React.FC<MainIndexProps> = ({
         {/* Index 05: Impacto en la familia (Only parents) */}
         {selectedProfile !== 'usuario' ? (
           <button 
-            onClick={() => toggleSection('familia')}
-            className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer sm:col-span-2 ${
+            onClick={() => {
+              if (!expandedSections['familia']) {
+                toggleSection('familia');
+                setTimeout(() => {
+                  document.getElementById('familia')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              } else {
+                toggleSection('familia');
+              }
+            }}
+            className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer ${
               expandedSections['familia'] 
                 ? 'bg-orange-400 text-black shadow-none' 
                 : 'bg-white text-black hover:bg-neutral-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
@@ -135,6 +180,35 @@ export const MainIndex: React.FC<MainIndexProps> = ({
             </div>
             <span className="font-mono text-[10.5px] font-black shrink-0 border-2 border-black p-1.5 ml-3 bg-white text-black uppercase">
               {expandedSections['familia'] ? 'CERRAR [-]' : 'DESPLEGAR [+]'}
+            </span>
+          </button>
+        ) : null}
+
+        {/* Index 06: Lecturas recomendadas (Only parents) */}
+        {selectedProfile !== 'usuario' ? (
+          <button 
+            onClick={() => {
+              if (!expandedSections['lecturas']) {
+                toggleSection('lecturas');
+                setTimeout(() => {
+                  document.getElementById('lecturas')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              } else {
+                toggleSection('lecturas');
+              }
+            }}
+            className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer ${
+              expandedSections['lecturas'] 
+                ? 'bg-violet-400 text-black shadow-none' 
+                : 'bg-white text-black hover:bg-neutral-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+            }`}
+          >
+            <div>
+              <span className="block font-mono text-[10px] font-bold uppercase opacity-60">Sección 06</span>
+              <span className="text-base sm:text-lg font-black uppercase leading-tight block mt-1">Lecturas recomendadas</span>
+            </div>
+            <span className="font-mono text-[10.5px] font-black shrink-0 border-2 border-black p-1.5 ml-3 bg-white text-black uppercase">
+              {expandedSections['lecturas'] ? 'CERRAR [-]' : 'DESPLEGAR [+]'}
             </span>
           </button>
         ) : null}

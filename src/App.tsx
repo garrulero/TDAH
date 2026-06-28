@@ -15,6 +15,7 @@ import { SectionDiaADia } from './components/SectionDiaADia';
 import { SectionBarreras } from './components/SectionBarreras';
 import { SectionEstrategias } from './components/SectionEstrategias';
 import { SectionFamilia } from './components/SectionFamilia';
+import { SectionLecturas } from './components/SectionLecturas';
 
 // Hooks
 import { useSimulator } from './hooks/useSimulator';
@@ -161,6 +162,14 @@ export default function App() {
             <SectionFamilia 
               isOpen={expandedSections['familia']}
               onToggle={() => toggleSection('familia')}
+              simulatorEnabled={simulatorEnabled}
+            />
+          )}
+
+          {selectedProfile !== 'usuario' && expandedSections['lecturas'] && (
+            <SectionLecturas 
+              isOpen={expandedSections['lecturas']}
+              onToggle={() => toggleSection('lecturas')}
               simulatorEnabled={simulatorEnabled}
             />
           )}

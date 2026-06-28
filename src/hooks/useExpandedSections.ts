@@ -7,7 +7,8 @@ const INITIAL_SECTIONS: SectionRecord = {
   'dia-a-dia': false,
   'barreras': false,
   'estrategias': false,
-  'familia': false
+  'familia': false,
+  'lecturas': false
 };
 
 interface ExpandedSectionsState {
