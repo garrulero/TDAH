@@ -32,7 +32,7 @@ export const SectionQueEs: React.FC<SectionQueEsProps> = ({
 
   const currentScript = VIDEO_SCRIPTS[scriptId] || VIDEO_SCRIPTS['p1'];
 
-  const showOnlyVideo = selectedProfile === 'usuario' && selectedAgeRange === 'p1';
+  const showOnlyVideo = selectedProfile === 'usuario';
 
   return (
     <CollapsibleSection
@@ -129,7 +129,13 @@ export const SectionQueEs: React.FC<SectionQueEsProps> = ({
             }
 
             const DRIVE_MAP: Record<string, string> = {
-              'usuario_p1': '1a_NwhfUxcUnx-Ueb8lod6UAArBnHbWSw'
+              'usuario_p1': '1a_NwhfUxcUnx-Ueb8lod6UAArBnHbWSw',
+              'usuario_p2': '1rEHBxEXeEZmTqe4fCO96FzwDjWLoP4ho',
+              'usuario_p3': '1PiMNxGepgOWLeZZQufPl9dGH9TE2ZMi2',
+              'usuario_e1': '1BaSAF8B1i7Qqnu5hY26gLBXJFDTgMCnl',
+              'usuario_e2': '1MKITt1YfB_PqgnnOjkRJJCyKk3oSVlT-',
+              'usuario_b1': '1UoX2FBBT2XPSoTuQ7iRf4dPpfzMRTHvS',
+              'usuario_a18': '1UJMKaYQdGXdAf93DU_ZJxSdadxfxoqWd'
             };
             const driveId = DRIVE_MAP[`${selectedProfile}_${selectedAgeRange}`];
 
