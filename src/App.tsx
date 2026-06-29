@@ -166,11 +166,13 @@ export default function App() {
             />
           )}
 
-          {selectedProfile !== 'usuario' && expandedSections['lecturas'] && (
+          {expandedSections['lecturas'] && (
             <SectionLecturas 
               isOpen={expandedSections['lecturas']}
               onToggle={() => toggleSection('lecturas')}
               simulatorEnabled={simulatorEnabled}
+              selectedProfile={selectedProfile}
+              selectedAgeRange={selectedAgeRange}
             />
           )}
 

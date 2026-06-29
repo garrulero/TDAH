@@ -184,34 +184,34 @@ export const MainIndex: React.FC<MainIndexProps> = ({
           </button>
         ) : null}
 
-        {/* Index 06: Lecturas recomendadas (Only parents) */}
-        {selectedProfile !== 'usuario' ? (
-          <button 
-            onClick={() => {
-              if (!expandedSections['lecturas']) {
-                toggleSection('lecturas');
-                setTimeout(() => {
-                  document.getElementById('lecturas')?.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-              } else {
-                toggleSection('lecturas');
-              }
-            }}
-            className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer ${
-              expandedSections['lecturas'] 
-                ? 'bg-violet-400 text-black shadow-none' 
-                : 'bg-white text-black hover:bg-neutral-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-            }`}
-          >
-            <div>
-              <span className="block font-mono text-[10px] font-bold uppercase opacity-60">Sección 06</span>
-              <span className="text-base sm:text-lg font-black uppercase leading-tight block mt-1">Lecturas recomendadas</span>
-            </div>
-            <span className="font-mono text-[10.5px] font-black shrink-0 border-2 border-black p-1.5 ml-3 bg-white text-black uppercase">
-              {expandedSections['lecturas'] ? 'CERRAR [-]' : 'DESPLEGAR [+]'}
+        {/* Index 06: Lecturas recomendadas */}
+        <button 
+          onClick={() => {
+            if (!expandedSections['lecturas']) {
+              toggleSection('lecturas');
+              setTimeout(() => {
+                document.getElementById('lecturas')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            } else {
+              toggleSection('lecturas');
+            }
+          }}
+          className={`p-4 border-4 border-black text-left transition-all active:translate-y-1 active:shadow-none min-h-[90px] flex items-center justify-between cursor-pointer ${
+            expandedSections['lecturas'] 
+              ? 'bg-violet-400 text-black shadow-none' 
+              : 'bg-white text-black hover:bg-neutral-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+          }`}
+        >
+          <div>
+            <span className="block font-mono text-[10px] font-bold uppercase opacity-60">
+              {selectedProfile === 'usuario' ? 'Sección 03' : 'Sección 06'}
             </span>
-          </button>
-        ) : null}
+            <span className="text-base sm:text-lg font-black uppercase leading-tight block mt-1">Lecturas recomendadas</span>
+          </div>
+          <span className="font-mono text-[10.5px] font-black shrink-0 border-2 border-black p-1.5 ml-3 bg-white text-black uppercase">
+            {expandedSections['lecturas'] ? 'CERRAR [-]' : 'DESPLEGAR [+]'}
+          </span>
+        </button>
 
       </div>
     </div>
