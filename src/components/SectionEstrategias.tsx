@@ -96,6 +96,24 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
     }
   };
 
+  const getParentAdaptationText = () => {
+    switch (selectedAgeRange) {
+      case "p1":
+      case "p2":
+      case "p3":
+        return "Durante la etapa de Primaria, vuestro rol es acompañar y guiar paso a paso. Las estrategias deben ser lúdicas, con instrucciones cortas y muy visuales. Ayudad a estructurar su entorno y elogiad sus esfuerzos para fomentar la motivación.";
+      case "e1":
+      case "e2":
+        return "En la ESO, el objetivo es ir delegando responsabilidades progresivamente. Pasad de ser directores a ser supervisores. Ayudadles a usar herramientas de organización y fomentad que participen en la búsqueda de soluciones.";
+      case "b1":
+        return "En Bachillerato, debéis fomentar su total autonomía. Vuestro rol es ser un apoyo estratégico y emocional. Animadles a gestionar su propio tiempo y a reconocer cuándo necesitan hacer pausas o pedir ayuda.";
+      case "a18":
+        return "En la etapa adulta, el rol de la familia o entorno cercano es de acompañamiento y respeto. Apoyad sus decisiones, fomentad el autoconocimiento y animadles a usar sus propias herramientas de organización y gestión del estrés.";
+      default:
+        return "Como familia, vuestro rol no es ser los directores de cada tarea, sino los guías que facilitan el entorno. Ayudar a implementar estas estrategias en casa fomenta la autonomía de vuestro hijo o hija y reduce los conflictos diarios. Revisad juntos estas opciones y comprobad cuáles os funcionan mejor.";
+    }
+  };
+
   const getAdaptationModifierText = () => {
     return ""; // handled natively
   };
@@ -140,11 +158,7 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
 
         {selectedProfile === "padre" && (
           <div className="p-4 bg-orange-100 border-2 border-black font-semibold text-lg mb-6">
-            Como familia, vuestro rol no es ser los directores de cada tarea,
-            sino los guías que facilitan el entorno. Ayudar a implementar estas
-            estrategias en casa fomenta la autonomía de vuestro hijo o hija y
-            reduce los conflictos diarios. Revisad juntos estas opciones y
-            comprobad cuáles os funcionan mejor.
+            {getParentAdaptationText()}
           </div>
         )}
 

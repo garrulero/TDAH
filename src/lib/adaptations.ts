@@ -161,34 +161,139 @@ export const adaptSteps = (steps: string[] | undefined, ageId: string | null) =>
 export const adaptParentSteps = (steps: string[] | undefined, ageId: string | null) => {
   if (!steps) return [];
   
+  const isPrimaria = ['p1', 'p2', 'p3'].includes(ageId || '');
+  const isEso = ['e1', 'e2'].includes(ageId || '');
+  const isBachi = ageId === 'b1';
+  const isAdulto = ageId === 'a18';
+  
   return steps.map(s => {
     let adapted = s
       .replace(/^El adulto modela/i, 'Modela tú primero')
       .replace(/^La persona realiza/i, 'Pídele que realice')
       .replace(/^Posteriormente verbaliza/i, 'Anímale a que verbalice')
-      .replace(/^Finalmente interioriza/i, 'Ayúdale a interiorizar')
-      .replace(/^Identificar /i, 'Ayúdale a identificar ')
-      .replace(/^Ordenar /i, 'Guiarle para ordenar ')
-      .replace(/^Establecer /i, 'Definid juntos o ayúdale a establecer ')
-      .replace(/^Utilizar /i, 'Acompáñale en el uso de ')
-      .replace(/^Estimar /i, 'Animarle a estimar ')
-      .replace(/^Alternar /i, 'Asegúrate de que alterna ')
-      .replace(/^Usar /i, 'Proporciónale y enséñale a usar ')
-      .replace(/^Tras la actividad se revisa/i, 'Revisad juntos tras la actividad')
-      .replace(/^Analizar /i, 'Analizad juntos ')
-      .replace(/^Proponer /i, 'Animarle a proponer ')
-      .replace(/^Reforzar /i, 'Refuerza tú ')
-      .replace(/^Reducir /i, 'Ve reduciendo ')
-      .replace(/^Retirar /i, 'Ve retirando ')
-      .replace(/^Elegir /i, 'Ayúdale a elegir ')
-      .replace(/^Inspirar /i, 'Pídele que inspire ')
-      .replace(/^Mantener /i, 'Indícale que mantenga ')
-      .replace(/^Expulsar /i, 'Pídele que expulse ')
-      .replace(/^Tensar /i, 'Guíale para que tense ')
-      .replace(/^Relajar /i, 'Indícale que relaje ')
-      .replace(/^Concentrarse /i, 'Ayúdale a concentrarse ')
-      .replace(/^Prestar atención /i, 'Anímale a prestar atención ')
-      .replace(/^Dividir /i, 'Ayúdale a dividir ');
+      .replace(/^Finalmente interioriza/i, 'Ayúdale a interiorizar');
+
+    if (isPrimaria) {
+      adapted = adapted
+        .replace(/^Identificar /i, 'Ayúdale paso a paso a identificar ')
+        .replace(/^Ordenar /i, 'Ordenad juntos ')
+        .replace(/^Establecer /i, 'Fija con él/ella de forma visual ')
+        .replace(/^Utilizar /i, 'Enséñale jugando a utilizar ')
+        .replace(/^Estimar /i, 'Jugad a estimar ')
+        .replace(/^Alternar /i, 'Asegúrate de que alterna ')
+        .replace(/^Usar /i, 'Proporciónale y enséñale a usar ')
+        .replace(/^Tras la actividad se revisa/i, 'Revisad juntos tras la actividad con un premio o refuerzo')
+        .replace(/^Analizar /i, 'Analizad juntos de forma sencilla ')
+        .replace(/^Proponer /i, 'Pídele que proponga ')
+        .replace(/^Reforzar /i, 'Elogia y refuerza mucho ')
+        .replace(/^Reducir /i, 'Ve reduciendo la ayuda ')
+        .replace(/^Retirar /i, 'Ve retirando el apoyo visual ')
+        .replace(/^Elegir /i, 'Ayúdale a elegir ')
+        .replace(/^Inspirar /i, 'Dile "Coge aire como oliendo una flor" ')
+        .replace(/^Mantener /i, 'Dile "Aguanta el aire" ')
+        .replace(/^Expulsar /i, 'Dile "Sopla como apagando una vela" ')
+        .replace(/^Tensar /i, 'Jugad a tensar ')
+        .replace(/^Relajar /i, 'Jugad a relajar ')
+        .replace(/^Concentrarse /i, 'Ayúdale a concentrarse ')
+        .replace(/^Prestar atención /i, 'Pídele que preste atención ')
+        .replace(/^Dividir /i, 'Ayúdale a dividir ');
+    } else if (isEso) {
+      adapted = adapted
+        .replace(/^Identificar /i, 'Supervisa que identifique ')
+        .replace(/^Ordenar /i, 'Supervisa cómo ordena ')
+        .replace(/^Establecer /i, 'Acordad juntos ')
+        .replace(/^Utilizar /i, 'Recuérdale utilizar ')
+        .replace(/^Estimar /i, 'Anímale a estimar ')
+        .replace(/^Alternar /i, 'Recuérdale que alterne ')
+        .replace(/^Usar /i, 'Sugiérele usar ')
+        .replace(/^Tras la actividad se revisa/i, 'Revisad juntos tras la actividad')
+        .replace(/^Analizar /i, 'Analizad juntos ')
+        .replace(/^Proponer /i, 'Anímale a proponer ')
+        .replace(/^Reforzar /i, 'Valora y refuerza ')
+        .replace(/^Reducir /i, 'Ve reduciendo tu supervisión ')
+        .replace(/^Retirar /i, 'Ve retirando la ayuda externa ')
+        .replace(/^Elegir /i, 'Supervisa su elección de ')
+        .replace(/^Inspirar /i, 'Pídele que inspire ')
+        .replace(/^Mantener /i, 'Indícale que mantenga ')
+        .replace(/^Expulsar /i, 'Pídele que expulse ')
+        .replace(/^Tensar /i, 'Indícale que tense ')
+        .replace(/^Relajar /i, 'Indícale que relaje ')
+        .replace(/^Concentrarse /i, 'Anímale a concentrarse ')
+        .replace(/^Prestar atención /i, 'Recuérdale prestar atención ')
+        .replace(/^Dividir /i, 'Aconséjale dividir ');
+    } else if (isBachi) {
+      adapted = adapted
+        .replace(/^Identificar /i, 'Comprueba que logre identificar ')
+        .replace(/^Ordenar /i, 'Anímale a ordenar ')
+        .replace(/^Establecer /i, 'Anímale a establecer ')
+        .replace(/^Utilizar /i, 'Fomenta que utilice ')
+        .replace(/^Estimar /i, 'Sugiérele estimar ')
+        .replace(/^Alternar /i, 'Sugiérele alternar ')
+        .replace(/^Usar /i, 'Fomenta el uso de ')
+        .replace(/^Tras la actividad se revisa/i, 'Interésate por revisar tras la actividad')
+        .replace(/^Analizar /i, 'Dialogad para analizar ')
+        .replace(/^Proponer /i, 'Motívale a proponer ')
+        .replace(/^Reforzar /i, 'Muestra tu orgullo y refuerza ')
+        .replace(/^Reducir /i, 'Reduce al mínimo tu intervención al ')
+        .replace(/^Retirar /i, 'Retira tu intervención al ')
+        .replace(/^Elegir /i, 'Respeta que elija ')
+        .replace(/^Inspirar /i, 'Sugiérele que inspire ')
+        .replace(/^Mantener /i, 'Sugiérele que mantenga ')
+        .replace(/^Expulsar /i, 'Sugiérele que expulse ')
+        .replace(/^Tensar /i, 'Sugiérele tensar ')
+        .replace(/^Relajar /i, 'Sugiérele relajar ')
+        .replace(/^Concentrarse /i, 'Sugiérele concentrarse ')
+        .replace(/^Prestar atención /i, 'Sugiérele prestar atención ')
+        .replace(/^Dividir /i, 'Sugiérele dividir ');
+    } else if (isAdulto) {
+      adapted = adapted
+        .replace(/^Identificar /i, 'Respeta su forma de identificar ')
+        .replace(/^Ordenar /i, 'Respeta cómo ordena ')
+        .replace(/^Establecer /i, 'Apoya cómo decide establecer ')
+        .replace(/^Utilizar /i, 'Apóyale al utilizar ')
+        .replace(/^Estimar /i, 'Comentad cómo suele estimar ')
+        .replace(/^Alternar /i, 'Comentad cómo alterna ')
+        .replace(/^Usar /i, 'Respeta el uso de ')
+        .replace(/^Tras la actividad se revisa/i, 'Pregúntale qué tal fue tras la actividad')
+        .replace(/^Analizar /i, 'Pregúntale si quiere analizar ')
+        .replace(/^Proponer /i, 'Escucha lo que tiene que proponer ')
+        .replace(/^Reforzar /i, 'Comparte tu orgullo por ')
+        .replace(/^Reducir /i, 'Mantente al margen y permite ')
+        .replace(/^Retirar /i, 'Mantente al margen y permite ')
+        .replace(/^Elegir /i, 'Apoya sus elecciones al ')
+        .replace(/^Inspirar /i, 'Si le ayuda, acompáñale a inspirar ')
+        .replace(/^Mantener /i, 'Si le ayuda, acompáñale a mantener ')
+        .replace(/^Expulsar /i, 'Si le ayuda, acompáñale a expulsar ')
+        .replace(/^Tensar /i, 'Si le ayuda, acompáñale a tensar ')
+        .replace(/^Relajar /i, 'Si le ayuda, acompáñale a relajar ')
+        .replace(/^Concentrarse /i, 'Dale espacio para concentrarse ')
+        .replace(/^Prestar atención /i, 'Dale espacio para prestar atención ')
+        .replace(/^Dividir /i, 'Interésate en cómo decide dividir ');
+    } else {
+      adapted = adapted
+        .replace(/^Identificar /i, 'Ayúdale a identificar ')
+        .replace(/^Ordenar /i, 'Guiarle para ordenar ')
+        .replace(/^Establecer /i, 'Definid juntos o ayúdale a establecer ')
+        .replace(/^Utilizar /i, 'Acompáñale en el uso de ')
+        .replace(/^Estimar /i, 'Animarle a estimar ')
+        .replace(/^Alternar /i, 'Asegúrate de que alterna ')
+        .replace(/^Usar /i, 'Proporciónale y enséñale a usar ')
+        .replace(/^Tras la actividad se revisa/i, 'Revisad juntos tras la actividad')
+        .replace(/^Analizar /i, 'Analizad juntos ')
+        .replace(/^Proponer /i, 'Animarle a proponer ')
+        .replace(/^Reforzar /i, 'Refuerza tú ')
+        .replace(/^Reducir /i, 'Ve reduciendo ')
+        .replace(/^Retirar /i, 'Ve retirando ')
+        .replace(/^Elegir /i, 'Ayúdale a elegir ')
+        .replace(/^Inspirar /i, 'Pídele que inspire ')
+        .replace(/^Mantener /i, 'Indícale que mantenga ')
+        .replace(/^Expulsar /i, 'Pídele que expulse ')
+        .replace(/^Tensar /i, 'Guíale para que tense ')
+        .replace(/^Relajar /i, 'Indícale que relaje ')
+        .replace(/^Concentrarse /i, 'Ayúdale a concentrarse ')
+        .replace(/^Prestar atención /i, 'Anímale a prestar atención ')
+        .replace(/^Dividir /i, 'Ayúdale a dividir ');
+    }
 
     return adapted;
   });

@@ -92,7 +92,7 @@ export const SectionQueEs: React.FC<SectionQueEsProps> = ({
             </div>
             <p className="text-sm font-bold text-black max-w-2xl mx-auto">
               {selectedProfile === 'padre' 
-                ? 'A continuación puedes ver ejemplos de cómo explicar el TDAH en las distintas etapas.' 
+                ? 'A continuación puedes ver un ejemplo práctico en vídeo.' 
                 : currentScript.title}
             </p>
           </div>
