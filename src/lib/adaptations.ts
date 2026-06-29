@@ -9,22 +9,22 @@ export const adaptDescription = (title: string, originalDesc: string, ageId: str
 
   if (profile === 'padre') {
     if (isPrimaria) {
-      if (title.includes('Autoinstrucciones') || originalDesc.includes('mensajes internos')) return 'Enseñar a la persona a guiar su propio comportamiento mediante mensajes internos o verbalizaciones que le ayuden a organizar la acción y controlar impulsos. Se aplican enseñando una secuencia de frases breves que orientan la tarea. Modela tú mismo estas técnicas paso a paso como un juego para que te imite.';
+      if (title.includes('Autoinstrucciones') || originalDesc.includes('mensajes internos')) return 'Enseña a tu hijo a usar pequeñas frases en voz alta que funcionen como "pistas mágicas" para guiar sus pasos. Fomenta que te imite al principio, diciendo juntos qué hacer a continuación para que no se pierda en la actividad y frene la impulsividad. Conviértelo en un juego de detectives donde tú marcas el camino inicialmente.';
       return originalDesc + ' Ayúdale y guíale paso a paso, haciéndolo tú primero como un juego.';
     } else if (isEso) {
-      if (title.includes('Autoinstrucciones') || originalDesc.includes('mensajes internos')) return 'Enseñar a la persona a guiar su propio comportamiento mediante mensajes internos o verbalizaciones que le ayuden a organizar la acción y controlar impulsos. Se aplican enseñando una secuencia de frases breves que orientan la tarea. Sugiérele herramientas y asume un rol de supervisor de vez en cuando, dándole espacio.';
+      if (title.includes('Autoinstrucciones') || originalDesc.includes('mensajes internos')) return 'Muestra a tu adolescente cómo las autoverbalizaciones pueden ser su mejor aliado para planificar el estudio y contener los arrebatos. Invítale a crear su propio guion interno que le marque el rumbo de las tareas. Adopta una postura de acompañante distante, interviniendo sólo cuando veas que se atasca o pierde el foco.';
       return originalDesc + ' Sugiérele herramientas y asume un rol de supervisor de vez en cuando, dándole autonomía.';
     } else if (isBachi) {
-      if (title.includes('Autoinstrucciones') || originalDesc.includes('mensajes internos')) return 'Enseñar a la persona a guiar su propio comportamiento mediante mensajes internos o verbalizaciones que le ayuden a organizar la acción y controlar impulsos. Se aplican enseñando una secuencia de frases breves que orientan la tarea. Anímale a ser autónomo con estas técnicas. Vuestro rol es solo de acompañamiento.';
+      if (title.includes('Autoinstrucciones') || originalDesc.includes('mensajes internos')) return 'Anímale a consolidar un sistema de diálogos internos maduros que le permitan enfrentarse a la alta exigencia académica por sí solo. El objetivo es que logre organizar su mente y regular la ansiedad pre-examen de manera autónoma. Tu intervención debe ser mínima, sirviendo únicamente como red de seguridad afectiva y apoyo moral.';
       return originalDesc + ' Fomenta su total autonomía y acompáñale en sus decisiones sin fiscalizar.';
     } else if (isAdulto) {
-      if (title.includes('Autoinstrucciones') || originalDesc.includes('mensajes internos')) return 'Enseñar a la persona a guiar su propio comportamiento mediante mensajes internos o verbalizaciones que le ayuden a organizar la acción y controlar impulsos. Se aplican enseñando una secuencia de frases breves que orientan la tarea. Respeta sus propias instrucciones y mecanismos; vuestro rol es de respeto.';
+      if (title.includes('Autoinstrucciones') || originalDesc.includes('mensajes internos')) return 'Comprende que el adulto con TDAH necesita sus propios anclajes verbales para navegar las responsabilidades del día a día sin abrumarse. Estas instrucciones personales son su brújula para mantener el control ejecutivo y mitigar el caos. Muestra un respeto absoluto por sus tiempos, rutinas y las herramientas cognitivas que decida implementar por su cuenta.';
       return originalDesc + ' Tu rol es de acompañamiento y respeto a sus propios métodos y autonomía.';
     }
   }
 
   if (isPrimaria) {
-    if (title.includes('Autoinstrucciones') || originalDesc.includes('Autoinstrucciones')) return 'Nos hablaremos a nosotros mismos en voz alta con frases cortitas, para acordarnos de lo que hay que hacer y hacer un trabajo genial.';
+    if (title.includes('Autoinstrucciones') || originalDesc.includes('Autoinstrucciones')) return 'Nos hablaremos a nosotros mismos en voz alta usando frases muy cortitas que sirvan de recordatorio. Esto nos ayudará a no despistarnos con otras cosas y lograr un trabajo espectacular paso a paso.';
     if (originalDesc.includes('Consiste en respirar utilizando el abdomen')) return 'En vez de usar el pecho, vamos a respirar usando la barriguita como si estuvieras inflando un globo mágico. Lo haremos poquito a poco, como un juego super divertido.';
     if (originalDesc.includes('Ayuda a disminuir activación')) return 'Con este truco mágico, tu cuerpo se relajará un montón y podrás descansar mucho mejor.';
     if (originalDesc.includes('Favorece concentración')) return 'Te ayudará a que sea más fácil prestar atención y sentirte genial por dentro.';
@@ -53,7 +53,10 @@ export const adaptDescription = (title: string, originalDesc: string, ageId: str
   }
 
   if (isSecundaria) {
-    if (title.includes('Autoinstrucciones') || originalDesc.includes('Autoinstrucciones')) return 'Aprende a hablarte y guiarte de forma interna; como el mister que orienta el siguiente movimiento. Ideal ante el aumento de la exigencia del instituto.';
+    if (title.includes('Autoinstrucciones') || originalDesc.includes('Autoinstrucciones')) {
+      if (isEso) return 'Aprende a hablarte y guiarte de forma interna; como un entrenador personal que orienta tu siguiente movimiento. Esta táctica te vendrá increíble para no perderte entre tantas asignaturas nuevas del instituto.';
+      if (isBachi) return 'Desarrolla tus propios guiones mentales para sobrevivir al estrés y volumen de estudio previos a la universidad. Utiliza verbalizaciones directas para enfocar tu concentración, frenando la ansiedad cuando sientas que no llegas a todo.';
+    }
     if (originalDesc.includes('Consiste en respirar utilizando el abdomen')) return 'Usa tu abdomen para respirar en vez del pecho; te ayudará un montón a quitar tensiones y conseguir un estado de calma antes de tus clases o exámenes.';
     if (originalDesc.includes('Ayuda a disminuir activación')) return 'Genial para relajar todo tu cuerpo bajando revoluciones cuando notas que la cabeza te va a mil y te abrumas.';
     if (originalDesc.includes('Favorece concentración')) return 'Te servirá para concentrarte mejor en tus estudios y saber manejar las frustraciones típicas de la semana con algo más de autocontrol.';
@@ -82,7 +85,7 @@ export const adaptDescription = (title: string, originalDesc: string, ageId: str
   }
 
   if (isAdulto) {
-    if (title.includes('Autoinstrucciones') || originalDesc.includes('Autoinstrucciones')) return 'Incorpora estrategias verbales o anotadoras propias altamente maduras dirigidas puramente a que te encamines proactivamente en todas tus metas adultas complejas sin la existencia de padres u orientadores que manden tu atención al centro.';
+    if (title.includes('Autoinstrucciones') || originalDesc.includes('Autoinstrucciones')) return 'Aplica sistemas de autodiálogo consciente diseñados para estructurar responsabilidades complejas en tu rutina diaria. Estos marcadores cognitivos te servirán para retomar el hilo conductor de tus tareas sin depender de supervisión externa.';
     if (originalDesc.includes('Consiste en respirar utilizando el abdomen')) return 'Fundamentada en utilizar el diafragma en lugar de la respiración torácica y superficial diaria, siendo el aliado perfecto a llevar donde interese relajar las constantes corporales en unos segundos.';
     if (originalDesc.includes('Ayuda a disminuir activación')) return 'Herramienta vital para rebajar picos fisiológicos producidos por rumiación adulta y agobio laboral prolongado.';
     if (originalDesc.includes('Favorece concentración')) return 'Estimula tu centrado atencional de forma consciente; excelente autorregulación ante retos densos intelectualmente hablando en la vida diaria.';
