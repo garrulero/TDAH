@@ -292,7 +292,7 @@ export const TechniquesDictionary: React.FC<TechniquesDictionaryProps> = ({
 
   const adaptItem = (item: any) => ({
     ...item,
-    desc: adaptDescription(item.title, item.desc, selectedAgeRange),
+    desc: adaptDescription(item.title, item.desc, selectedAgeRange, "usuario"),
     steps: adaptSteps(item.steps, selectedAgeRange),
   });
 

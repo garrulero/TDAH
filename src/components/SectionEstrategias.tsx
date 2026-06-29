@@ -120,7 +120,7 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
 
   const adaptItem = (item: any) => ({
     ...item,
-    desc: adaptDescription(item.title, item.desc, selectedAgeRange),
+    desc: adaptDescription(item.title, item.desc, selectedAgeRange, selectedProfile),
     steps: selectedProfile === 'padre' 
       ? adaptParentSteps(item.steps, selectedAgeRange) 
       : adaptSteps(item.steps, selectedAgeRange)

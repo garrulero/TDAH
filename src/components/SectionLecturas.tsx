@@ -151,8 +151,22 @@ export const SectionLecturas: React.FC<SectionLecturasProps> = ({
         </ul>
       </div>
 
+      <div className="mt-8 mb-8 border-t-4 border-black border-dashed"></div>
+
+      {/* Sección: Lecturas para el hijo/usuario */}
+      <div className="space-y-4 border-l-4 border-[#00FF41] pl-4 sm:pl-6 bg-[#00FF41]/10 p-4">
+        <div className="flex flex-col gap-2">
+          <h4 className="font-extrabold text-2xl text-black uppercase">📚 Lecturas dirigidas a ellos</h4>
+          <p className="text-sm font-bold text-neutral-600 uppercase font-mono">
+            A continuación se muestran las lecturas recomendadas para tu hijo/a según la etapa escolar seleccionada.
+          </p>
+        </div>
+        
+        {renderUsuarioContent()}
+      </div>
+
       {/* Botón: Más Lecturas */}
-      <div className="pt-4 border-t-4 border-black border-dashed flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="pt-4 mt-8 border-t-4 border-black border-dashed flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm font-bold text-black font-mono">
           ¿Buscas más referencias científicas o lecturas adaptadas?
         </p>
