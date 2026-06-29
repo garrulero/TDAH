@@ -99,31 +99,20 @@ export const SectionQueEs: React.FC<SectionQueEsProps> = ({
           
           {(() => {
             if (selectedProfile === 'padre') {
-              const videos = [
-                { title: 'PRIMARIA', id: '1Wfsj6QlYa1zgXYSJCpeKqPcbjBY6EFxc' },
-                { title: 'SECUNDARIA Y BACHILLER', id: '1ZHWg75d6fLHp9WMqqgHyIdcA4buTNUlx' },
-                { title: 'ADULTOS', id: '182XmXTgRuT07j95zwK66aEVm4A29FVG2' }
-              ];
+              const driveId = '1Wfsj6QlYa1zgXYSJCpeKqPcbjBY6EFxc'; // Video genérico para padres
               
               return (
-                <div className="w-full flex flex-col gap-12 mt-4">
-                  {videos.map(video => (
-                    <div key={video.title} className="flex flex-col items-center w-full">
-                      <h4 className="font-black text-xl mb-4 bg-black text-white px-6 py-2 uppercase border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,255,65,1)]">
-                        {video.title}
-                      </h4>
-                      <div className="w-full max-w-3xl aspect-video border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden bg-black">
-                        <iframe 
-                          src={`https://drive.google.com/file/d/${video.id}/preview`} 
-                          title={`Google Drive video player - ${video.title}`} 
-                          className="absolute top-0 left-0 w-full h-full"
-                          frameBorder="0" 
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                          allowFullScreen
-                        />
-                      </div>
-                    </div>
-                  ))}
+                <div className="w-full flex flex-col items-center gap-12 mt-4">
+                  <div className="w-full max-w-3xl aspect-video border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden bg-black">
+                    <iframe 
+                      src={`https://drive.google.com/file/d/${driveId}/preview`} 
+                      title="Google Drive video player - ¿Qué es el TDAH?" 
+                      className="absolute top-0 left-0 w-full h-full"
+                      frameBorder="0" 
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      allowFullScreen
+                    />
+                  </div>
                 </div>
               );
             }

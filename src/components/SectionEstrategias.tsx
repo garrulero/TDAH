@@ -30,45 +30,46 @@ export const SectionEstrategias: React.FC<SectionEstrategiasProps> = ({
   const [sessionModalOpen, setSessionModalOpen] = useState(false);
   const [selectedTechnique, setSelectedTechnique] = useState<any | null>(null);
 
-  const renderStageSelector = () => (
-    <div className="flex flex-wrap sm:grid sm:grid-cols-3 lg:grid-cols-6 border-4 border-black font-mono text-[10px] sm:text-xs bg-amber-100 p-2 sm:p-3 gap-2 sm:gap-3">
-      {[
-        { id: "p1", label: "1º Ciclo Primaria (6-8)", color: "bg-[#00FF41]" },
-        { id: "p2", label: "2º Ciclo Primaria (8-10)", color: "bg-[#00FF41]" },
-        { id: "p3", label: "3º Ciclo Primaria (10-12)", color: "bg-[#00FF41]" },
-        { id: "e1", label: "1ª Etapa ESO (12-14)", color: "bg-[#FFFF00]" },
-        { id: "e2", label: "2ª Etapa ESO (14-16)", color: "bg-[#FFFF00]" },
-        { id: "b1", label: "Bachiller (16-18)", color: "bg-[rgb(56,189,248)]" },
-        {
-          id: "a18",
-          label: "Adulto (18+)",
-          color: "bg-pink-500",
-          textColor: "text-white",
-        },
-      ].map((stage) => {
-        const isSelected = selectedAgeRange === stage.id;
-        const btnTextColor = stage.textColor || "text-black";
-        return (
-          <button
-            key={stage.id}
-            type="button"
-            onClick={() => setSelectedAgeRange(stage.id as AgeRangeOption)}
-            className={`relative py-2.5 px-1 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 sm:flex-none flex items-center justify-center gap-1 min-w-[120px] sm:min-w-0 ${isSelected ? `${stage.color} ${btnTextColor} shadow-none translate-y-[2px] translate-x-[2px]` : "bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none"}`}
-          >
-            {isSelected && (
-              <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span>
-                <span
-                  className={`relative inline-flex h-3 w-3 ${stage.color} border border-black`}
-                ></span>
-              </span>
-            )}
-            {stage.label}
-          </button>
-        );
-      })}
-    </div>
-  );
+  const renderStageSelector = () => {
+    if (selectedProfile === 'usuario') return null;
+
+    return (
+      <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 border-4 border-black font-mono text-[10px] sm:text-xs bg-amber-100 p-2 sm:p-3 gap-2 sm:gap-3">
+        {[
+          { id: "p1", label: "Primero, segundo y tercer ciclo de Primaria", color: "bg-[#00FF41]" },
+          { id: "e1", label: "Primera y segunda etapa de la ESO", color: "bg-[#FFFF00]" },
+          { id: "b1", label: "Bachiller (16-18 años)", color: "bg-[rgb(56,189,248)]" },
+          {
+            id: "a18",
+            label: "Adulto (18+ años)",
+            color: "bg-pink-500",
+            textColor: "text-white",
+          },
+        ].map((stage) => {
+          const isSelected = selectedAgeRange === stage.id;
+          const btnTextColor = stage.textColor || "text-black";
+          return (
+            <button
+              key={stage.id}
+              type="button"
+              onClick={() => setSelectedAgeRange(stage.id as AgeRangeOption)}
+              className={`relative py-3 px-2 font-black text-center uppercase transition-all duration-150 cursor-pointer border-2 border-black flex-1 flex items-center justify-center gap-1 ${isSelected ? `${stage.color} ${btnTextColor} shadow-none translate-y-[2px] translate-x-[2px]` : "bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-neutral-100 hover:-translate-y-0.5 active:translate-y-[2px] active:translate-x-[2px] active:shadow-none"}`}
+            >
+              {isSelected && (
+                <span className="absolute -left-1.5 -top-1.5 flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full bg-black opacity-75"></span>
+                  <span
+                    className={`relative inline-flex h-3 w-3 ${stage.color} border border-black`}
+                  ></span>
+                </span>
+              )}
+              {stage.label}
+            </button>
+          );
+        })}
+      </div>
+    );
+  };
 
   const toggleStrategy = (title: string) => {
     setOpenStrategy((prev) => (prev === title ? null : title));

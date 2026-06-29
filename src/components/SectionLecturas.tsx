@@ -183,14 +183,14 @@ export const SectionLecturas: React.FC<SectionLecturasProps> = ({
             </div>
             <ul className="space-y-4">
               {[
-                { title: "Trasto, un campeón en la familia", link: "https://www.youtube.com/watch?v=2VpzCD2wLIE", isVideo: true },
-                { title: "Pincho se va de vacaciones", link: "https://www.youtube.com/watch?v=ZwK03uFyQ50", isVideo: true },
-                { title: "Luna destaca en el colegio", link: "https://www.youtube.com/watch?v=ZxIdBEIg8HE", isVideo: true },
-                { title: "Fosforete, un amigo muy especial", link: "https://www.youtube.com/watch?v=ZwK03uFyQ50", isVideo: true },
+                { title: "Trasto, un campeón en la familia", link: "https://www.youtube.com/watch?v=2VpzCD2wLIE", isVideo: true, shared: true },
+                { title: "Pincho se va de vacaciones", link: "https://www.youtube.com/watch?v=ZwK03uFyQ50", isVideo: true, shared: true },
+                { title: "Luna destaca en el colegio", link: "https://www.youtube.com/watch?v=ZxIdBEIg8HE", isVideo: true, shared: true },
+                { title: "Fosforete, un amigo muy especial", link: "https://www.youtube.com/watch?v=ZwK03uFyQ50", isVideo: true, shared: true },
                 { title: "Julieta, ¡estate quieta!. (2008). Autor: Rosemary Wells. Editorial: Alfaguara." },
                 { title: "Una palabra olvidada. Edita: Fundación CADAH." },
                 { title: "Rubén, el Niño Hiperactivo. (1997). Autor: E.M. García Pérez. Editorial: Bilbao: COHS. Consultores." },
-                { title: "Cuentos para aprender a comportarse. (2007). Autores: Juan Carlos Arriaza Mayas y Leonor Guerrero Ruiz. Editoral: CEPE." },
+                { title: "Cuentos para aprender a comportarse. (2007). Autores: Juan Carlos Arriaza Mayas y Leonor Guerrero Ruiz. Editoral: CEPE.", shared: true },
                 { title: 'Había una vez... una Abeja. Cuentos para ayudar a mejorar la conducta en los niños, "el autocontrol". (2005). Autores: Nazaret Cantero Muñoz, Angeles Páez López. Editoral: CEPE.' },
                 { title: "Había una vez... Una Liebre. Cuentos para ayudar a mejorar la conducta de los niños. (2005). Autores: Nazaret Cantero Muñoz, Angeles Páez López. Editoral: CEPE." },
                 { title: "Había una vez... Un Gatito. Cuentos para ayudar a mejorar la conducta de los niños. (2005). Autores: Nazaret Cantero Muñoz, Angeles Páez López. Editoral: CEPE." },
@@ -198,15 +198,22 @@ export const SectionLecturas: React.FC<SectionLecturasProps> = ({
                 { title: "Había una vez... Una Tortuga. Cuentos para ayudar a mejorar la conducta de los niños. (2005). Autores: Nazaret Cantero Muñoz, Angeles Páez López. Editoral: CEPE." },
                 { title: "Había una vez... Un perrito. Cuentos para ayudar a mejorar la conducta de los niños. (2005). Autores: Nazaret Cantero Muñoz, Angeles Páez López. Editoral: CEPE." },
                 { title: "Dani Bocafuego (4 libros). (2011). Autora: Ursula Vernon. Colección Novela gráfica. Editorial: La Galera." },
-                { title: "El ratoncito Fernandito no para quieto ni un poquito. Terapicuentos. Editorial: Ediciones FORTUNA." },
-                { title: "La Leona Maripilista en el colegio se despista. Terapicuentos. Editorial: Ediciones FORTUNA." },
-                { title: "El Perrito Antón se comporta como un matón. Terapicuentos. Editorial: Ediciones FORTUNA." },
-                { title: "El Caballo Pocaspecas hace muchas muecas. Terapicuentos. Editorial: Ediciones FORTUNA." },
-                { title: "Las rabietas. Autora: Catherine Dolto. Editorial: Picarona." }
+                { title: "El ratoncito Fernandito no para quieto ni un poquito. Terapicuentos. Editorial: Ediciones FORTUNA.", shared: true },
+                { title: "La Leona Maripilista en el colegio se despista. Terapicuentos. Editorial: Ediciones FORTUNA.", shared: true },
+                { title: "El Perrito Antón se comporta como un matón. Terapicuentos. Editorial: Ediciones FORTUNA.", shared: true },
+                { title: "El Caballo Pocaspecas hace muchas muecas. Terapicuentos. Editorial: Ediciones FORTUNA.", shared: true },
+                { title: "Las rabietas. Autora: Catherine Dolto. Editorial: Picarona.", shared: true }
               ].map((item, idx) => (
-                <li key={idx} className="bg-neutral-50 p-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200">
+                <li key={idx} className={`p-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 ${item.shared ? 'bg-yellow-50' : 'bg-neutral-50'}`}>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <span className="font-bold text-base block text-black">{item.title}</span>
+                    <div>
+                      <span className="font-bold text-base block text-black">{item.title}</span>
+                      {item.shared && (
+                        <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-black uppercase tracking-wider text-violet-700 bg-violet-100 px-2 py-0.5 mt-2 border border-violet-700 rounded-full">
+                          👨‍👩‍👧‍👦 Ideal para compartir en familia
+                        </span>
+                      )}
+                    </div>
                     {item.link && (
                       <a 
                         href={item.link}
@@ -234,10 +241,10 @@ export const SectionLecturas: React.FC<SectionLecturasProps> = ({
             </div>
             <ul className="space-y-4">
               {[
-                { title: "¡Soy Hiperactivo/a! ¿Qué Puedo Hacer?. (1997). Autor: E.M. García Pérez. Editorial: Bilbao: COHS. Consultores." },
-                { title: "M. Non Stop - El Héroe hiperactivo. (2008). Autores: J. A Hormaechea, A. Uribarri y J. Ubierna. Edita: Hobari Fundazioa." },
+                { title: "¡Soy Hiperactivo/a! ¿Qué Puedo Hacer?. (1997). Autor: E.M. García Pérez. Editorial: Bilbao: COHS. Consultores.", shared: true },
+                { title: "M. Non Stop - El Héroe hiperactivo. (2008). Autores: J. A Hormaechea, A. Uribarri y J. Ubierna. Edita: Hobari Fundazioa.", shared: true },
                 { title: "La Prueba. (2009). Autores: J. A Hormaechea, A. Uribarri y R. Garay." },
-                { title: "ATENTA: Buscando el camino. (2010). Autores: Roberto Bergado y Antonio Hormaechea (Prólogo: Luis Prieto.)" },
+                { title: "ATENTA: Buscando el camino. (2010). Autores: Roberto Bergado y Antonio Hormaechea (Prólogo: Luis Prieto.)", shared: true },
                 { title: "Juanito y su TDAH. Ser feliz es posible. (2012). Autor: Francisco Javier Lozano Soriano. Editoral: UNIV. DE SAN JORGE," },
                 { title: "Yo, Elvis Riboldi y Boris el superdotado. (2012). Autor: Bono Bidari. Editoral: LA GALERA, S.A. EDITORIAL." },
                 { title: "Yo, Elvis Riboldi y El Restaurante Chino. (2012). Autor: Bono Bidari. Editoral: LA GALERA, S.A. EDITORIAL." },
@@ -246,11 +253,18 @@ export const SectionLecturas: React.FC<SectionLecturasProps> = ({
                 { title: "Yo, Elvis Riboldi, y la máquina del tiempo. (2014). Autor: Bono Bidari. Editoral: LA GALERA, S.A. EDITORIAL." },
                 { title: "Yo, Elvis Riboldi y la familia Blood. (2014). Autor: Bono Bidari. Editoral: LA GALERA, S.A. EDITORIAL." },
                 { title: "Yo, Elvis Riboldi, y Murfi el extraterrestre. (2014). Autor: Bono Bidari. Editoral: LA GALERA, S.A. EDITORIAL." },
-                { title: "Los peores años de mi vida (Libros 1, 2, 3, 4). (2013). Autores: James patterson y Chris Tebbetts. Ilustraciones: Laura Park. Colección Novela gráfica. Editorial: La Galera." }
+                { title: "Los peores años de mi vida (Libros 1, 2, 3, 4). (2013). Autores: James patterson y Chris Tebbetts. Ilustraciones: Laura Park. Colección Novela gráfica. Editorial: La Galera.", shared: true }
               ].map((item, idx) => (
-                <li key={idx} className="bg-neutral-50 p-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200">
+                <li key={idx} className={`p-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 ${item.shared ? 'bg-yellow-50' : 'bg-neutral-50'}`}>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <span className="font-bold text-base block text-black">{item.title}</span>
+                    <div>
+                      <span className="font-bold text-base block text-black">{item.title}</span>
+                      {item.shared && (
+                        <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-black uppercase tracking-wider text-violet-700 bg-violet-100 px-2 py-0.5 mt-2 border border-violet-700 rounded-full">
+                          👨‍👩‍👧‍👦 Ideal para compartir en familia
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </li>
               ))}
